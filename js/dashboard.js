@@ -128,9 +128,12 @@ function group(filter, fields, cb) {
   });
 }
 
-var releases = ["1.3", "1.3T", "1.4", "1.5"];
+// Initially hide the body and fade it in when we get some data to show.
+$("body ul").hide();
 
 $(function () {
+  var releases = ["1.3", "1.3T", "1.4", "1.5"];
+
   // Parse the url and extract what the user wants to see
   var parts = window.location.href.split("?");
   if (parts.length > 1) {
@@ -206,8 +209,18 @@ $(function () {
     return html;
   }
 
+  var show = (function () {
+    var waiting = 2;
+    return function () {
+      if (--waiting === 0) {
+        $("body ul").fadeIn(400);
+      }
+    };
+  })();
+
   group(all().blocking(suffix(releases, "?")).open(), ["cf_blocking_b2g"], function (error, counts) {
     $("li#noms").append(formatStatus(counts));
+    show();
   });
   group(all().blocking(suffix(releases, "+")).open(), ["component", "cf_blocking_b2g"], function (error, counts) {
     if ("General" in counts) {
@@ -215,5 +228,6 @@ $(function () {
       delete counts.General;
     }
     $("li#blockers").append(formatComponents(counts));
+    show();
   });
 });

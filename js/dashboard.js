@@ -192,11 +192,11 @@ $(function () {
     html += "</ul>";
     return html;
   }
-  function formatTeams(teams) {
-    var html = "<ul id='teams'>";
-    eachAlphabetically(teams, function (team, counts) {
-      html += "<li><div>" + team + "</div>";
-      html += formatStatus(counts, team);
+  function formatComponents(components) {
+    var html = "<ul id='components'>";
+    eachAlphabetically(components, function (component, counts) {
+      html += "<li><div>" + component + "</div>";
+      html += formatStatus(counts, component);
       html += "</li>";
     });
     html += "</ul>";
@@ -211,6 +211,6 @@ $(function () {
       $("li#triage").append(formatStatus(counts.General, "General"));
       delete counts.General;
     }
-    $("li#blockers").append(formatTeams(counts));
+    $("li#blockers").append(formatComponents(counts));
   });
 });

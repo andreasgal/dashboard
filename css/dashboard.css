@@ -26,7 +26,7 @@ ul#status > li {
   font-weight: normal;
   cursor: pointer;
 }
-ul#teams > li {
+ul#components > li {
   display: inline-block;
   padding: 20px 10px 20px 10px;
   text-align: center;

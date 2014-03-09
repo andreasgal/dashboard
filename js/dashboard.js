@@ -166,14 +166,14 @@ $(function () {
     };
   })();
 
-  function formatRelease(release, count) {
-    var canonical = release.replace("+", "").replace("?", "");
-    return "<li " + getReleaseColor(canonical) + ">" + release + "<div id='count'>" + count + "</div></li>";
-  }
   function formatStatus(counts) {
     var html = "<ul id='status'>";
     eachAlphabetically(counts, function (release, count) {
-      html += formatRelease(release, count);
+      var canonical = release.replace("+", "").replace("?", "");
+      html += "<li " + getReleaseColor(canonical) + ">";
+      html += "<div id='release'>" + release + "</div>";
+      html += "<div id='count'>" + count + "</div>";
+      html += "</li>";
     });
     html += "</ul>";
     return html;

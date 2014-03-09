@@ -147,9 +147,28 @@ $(function () {
     });
   }
 
+  // Assign a unique color and return it as a class declaration
+  var getUniqueColor = (function () {
+    var color = 0;
+    return function () {
+      return "class='color" + (color++) + "'";
+    };
+  })();
+
+  // Get the color for a release as a class declaration
+  var getReleaseColor = (function () {
+    var colors = [];
+    return function (canonical) {
+      if (!(canonical in colors)) {
+        colors[canonical] = getUniqueColor();
+      }
+      return colors[canonical];
+    };
+  })();
+
   function formatRelease(release, count) {
     var canonical = release.replace("+", "").replace("?", "");
-    return "<li data-release='" + canonical + "'>" + release + "<div id='count'>" + count + "</div></li>";
+    return "<li " + getReleaseColor(canonical) + ">" + release + "<div id='count'>" + count + "</div></li>";
   }
   function formatStatus(counts) {
     var html = "<ul id='status'>";
@@ -169,6 +188,7 @@ $(function () {
     html += "</ul>";
     return html;
   }
+
   group(all().blocking(suffix(releases, "?")).open(), ["cf_blocking_b2g"], function (error, counts) {
     $("li#noms").append(formatStatus(counts));
   });

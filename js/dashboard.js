@@ -233,7 +233,7 @@ function update() {
       $("li#triage").empty().append("<div>Triage</div>").append(formatStatus(counts.General, "General"));
       delete counts.General;
     }
-    $("li#blockers").empty().append("<div>Triage</div>").append(formatComponents(counts));
+    $("li#blockers").empty().append("<div>Blockers</div>").append(formatComponents(counts));
     show();
   });
 

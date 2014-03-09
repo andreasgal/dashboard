@@ -131,6 +131,22 @@ function group(filter, fields, cb) {
 var releases = ["1.3", "1.3T", "1.4", "1.5"];
 
 $(function () {
+  // Parse the url and extract what the user wants to see
+  var parts = window.location.href.split("#");
+  if (parts.length > 1) {
+    parts = parts[1].split("&");
+    $.each(parts, function (_, param) {
+      param = param.split("=");
+      if (param.length < 2)
+        return;
+      switch (param[0]) {
+      case "releases":
+        releases = param[1].split(",");
+        break;
+      }
+    });
+  }
+
   function formatRelease(release, count) {
     var canonical = release.replace("+", "").replace("?", "");
     return "<li data-release='" + canonical + "'>" + release + "<div id='count'>" + count + "</div></li>";

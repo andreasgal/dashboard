@@ -132,7 +132,7 @@ var releases = ["1.3", "1.3T", "1.4", "1.5"];
 
 $(function () {
   // Parse the url and extract what the user wants to see
-  var parts = window.location.href.split("#");
+  var parts = window.location.href.split("?");
   if (parts.length > 1) {
     parts = parts[1].split("&");
     $.each(parts, function (_, param) {

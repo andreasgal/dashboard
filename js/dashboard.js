@@ -131,8 +131,9 @@ function group(filter, fields, cb) {
 // Initially hide the body and fade it in when we get some data to show.
 $("body ul").hide();
 
-$(function () {
+function update() {
   var releases = ["1.3", "1.3T", "1.4", "1.5"];
+  var reload = 0;
 
   // Parse the url and extract what the user wants to see
   var parts = window.location.href.split("?");
@@ -145,6 +146,9 @@ $(function () {
       switch (param[0]) {
       case "releases":
         releases = param[1].split(",");
+        break;
+      case "reload":
+        reload = param[1] | 0;
         break;
       }
     });
@@ -219,15 +223,24 @@ $(function () {
   })();
 
   group(all().blocking(suffix(releases, "?")).open(), ["cf_blocking_b2g"], function (error, counts) {
-    $("li#noms").append(formatStatus(counts));
+    $("li#noms").empty().append("<div>Nominations</div>").append(formatStatus(counts));
     show();
   });
   group(all().blocking(suffix(releases, "+")).open(), ["component", "cf_blocking_b2g"], function (error, counts) {
     if ("General" in counts) {
-      $("li#triage").append(formatStatus(counts.General, "General"));
+      $("li#triage").empty().append("<div>Triage</div>").append(formatStatus(counts.General, "General"));
       delete counts.General;
     }
-    $("li#blockers").append(formatComponents(counts));
+    $("li#blockers").empty().append("<div>Triage</div>").append(formatComponents(counts));
     show();
   });
+
+  // Reload the data set if requested.
+  if (reload) {
+    setTimeout(update, reload * 1000);
+  }
+}
+
+$(function () {
+  update();
 });

@@ -24,7 +24,6 @@ if (parts.length > 1) {
 }
 
 // JSONP protocol to talk to bugzilla
-
 var _callbacks = [];
 
 function process(data) {

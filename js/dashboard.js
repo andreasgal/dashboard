@@ -132,8 +132,8 @@ var releases = ["1.3", "1.3T", "1.4", "1.5"];
 
 $(function () {
   function formatRelease(release, count) {
-    var id = "color" + release.replace("+", "").replace("?", "").replace(".", "");
-    return "<li id='" + id + "'>" + release + "<div id='count'>" + count + "</div></li>";
+    var canonical = release.replace("+", "").replace("?", "");
+    return "<li data-release='" + canonical + "'>" + release + "<div id='count'>" + count + "</div></li>";
   }
   function formatStatus(counts) {
     var html = "<ul id='status'>";
@@ -146,7 +146,7 @@ $(function () {
   function formatTeams(teams) {
     var html = "<ul id='teams'>";
     eachAlphabetically(teams, function (team, counts) {
-      html += "<li>" + team;
+      html += "<li><div>" + team + "</div>";
       html += formatStatus(counts);
       html += "</li>";
     });

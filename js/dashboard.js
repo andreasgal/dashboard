@@ -131,31 +131,36 @@ function group(filter, fields, cb) {
 var releases = ["1.3", "1.3T", "1.4", "1.5"];
 
 $(function () {
-  group(all().blocking(suffix(releases, "?")).open(), ["cf_blocking_b2g"], function (error, counts) {
-    var html = "<ul>";
+  function formatRelease(release, count) {
+    var id = "color" + release.replace("+", "").replace("?", "").replace(".", "");
+    return "<li id='" + id + "'>" + release + "<div id='count'>" + count + "</div></li>";
+  }
+  function formatStatus(counts) {
+    var html = "<ul id='status'>";
     eachAlphabetically(counts, function (release, count) {
-        html += "<li><span>" + release + ":</span><span>" + count + "</span></li>";
+      html += formatRelease(release, count);
     });
     html += "</ul>";
-    $("li#noms").append(html);
+    return html;
+  }
+  function formatTeams(teams) {
+    var html = "<ul id='teams'>";
+    eachAlphabetically(teams, function (team, counts) {
+      html += "<li>" + team;
+      html += formatStatus(counts);
+      html += "</li>";
+    });
+    html += "</ul>";
+    return html;
+  }
+  group(all().blocking(suffix(releases, "?")).open(), ["cf_blocking_b2g"], function (error, counts) {
+    $("li#noms").append(formatStatus(counts));
   });
   group(all().blocking(suffix(releases, "+")).open(), ["component", "cf_blocking_b2g"], function (error, counts) {
-    function format(counts) {
-      var html = "<ul>";
-      eachAlphabetically(counts, function (team, counts) {
-        html += "<li>" + team + "<ul>";
-        eachAlphabetically(counts, function (release, count) {
-          html += "<li><span>" + release + ":</span><span>" + count + "</span></li>";
-        });
-        html += "</ul></li>";
-      });
-      html += "</ul>";
-      return html;
-    }
     if ("General" in counts) {
-      $("li#triage").append(format({General: counts.General}));
+      $("li#triage").append(formatStatus(counts.General));
       delete counts.General;
     }
-    $("li#blockers").append(format(counts));
+    $("li#blockers").append(formatTeams(counts));
   });
 });

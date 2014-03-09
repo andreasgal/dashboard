@@ -3,5 +3,60 @@
 
 body {
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(0, 0, 0);
+  color: white;
+  margin: 0;
+}
+
+ul {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+  font-weight: bold;
+  padding: 10px 10px 10px 10px;
+  display: inline-block;
+}
+body > ul > li > div {
+  padding: 10px 10px 10px 10px;
+}
+ul#status > li {
+  display: inline-block;
+  padding: 10px 10px 10px 10px;
+  text-align: center;
+  font-weight: normal;
+}
+div#count {
+  font-size: 200%;
+  font-weight: bold;
+}
+
+/* Colors for category tiles */
+#noms {
+  background-color: rgb(86, 197, 255);
+}
+#triage {
+  background-color: rgb(0, 130, 135);
+}
+#blockers {
+  background-color: rgb(0, 216, 204);
+}
+
+/* Colors for release tiles */
+#color13 {
+  background-color: rgb(70, 23, 180);
+}
+#color13T {
+  background-color: rgb(0, 193, 63);
+}
+#color14 {
+  background-color: rgb(254, 123, 34);
+}
+#color15 {
+  background-color: rgb(176, 30, 0);
+}
+#color16 {
+  background-color: rgb(0, 106, 193);
+}
+#color17 {
+  background-color: rgb(225, 183, 0);
 }

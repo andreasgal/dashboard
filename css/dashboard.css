@@ -24,16 +24,17 @@ ul#status > li {
   padding: 10px 10px 10px 10px;
   text-align: center;
   font-weight: normal;
-  cursor: pointer;
 }
 ul#components > li {
   display: inline-block;
   padding: 20px 10px 20px 10px;
   text-align: center;
 }
-div#count {
+a#count {
   font-size: 200%;
   font-weight: bold;
+  color: white;
+  text-decoration: none;
 }
 
 /* Colors for categories */

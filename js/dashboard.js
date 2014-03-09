@@ -177,16 +177,16 @@ $(function () {
     $.each(args, function (n, arg) {
         args[n] = encodeURIComponent(arg[0]) + "=" + encodeURIComponent(arg[1]);
       });
-    return "data-link='" + url + args.join("&") + "'";
+    return "href='" + url + args.join("&") + "'";
   }
 
   function formatStatus(counts, component) {
     var html = "<ul id='status'>";
     eachAlphabetically(counts, function (release, count) {
       var canonical = release.replace("+", "").replace("?", "");
-      html += "<li " + getReleaseColor(canonical) + " " + getLink(release, component) + ">";
+      html += "<li " + getReleaseColor(canonical) + ">";
       html += "<div id='release'>" + release + "</div>";
-      html += "<div id='count'>" + count + "</div>";
+      html += "<a id='count' " + getLink(release, component) + ">" + count + "</a>";
       html += "</li>";
     });
     html += "</ul>";

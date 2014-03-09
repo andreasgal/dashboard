@@ -7,6 +7,9 @@ body {
   color: white;
   margin: 0;
 }
+a {
+  outline: none;
+}
 
 ul {
   list-style: none;

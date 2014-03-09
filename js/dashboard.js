@@ -169,7 +169,10 @@ $(function () {
   // Create a search query link for bugzilla we can redirect to.
   function getLink(release, component) {
     var url = "https://bugzilla.mozilla.org/buglist.cgi?";
-    var args = [["status", "UNCONFIRMED"], ["status", "NEW"], ["status", "ASSIGNED"], ["status", "REOPENED"]];
+    var args = [["bug_status", "UNCONFIRMED"],
+                ["bug_status", "NEW"],
+                ["bug_status", "ASSIGNED"],
+                ["bug_status", "REOPENED"]];
     if (release)
       args.push(["cf_blocking_b2g", release]);
     if (component)

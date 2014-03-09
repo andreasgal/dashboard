@@ -166,11 +166,25 @@ $(function () {
     };
   })();
 
-  function formatStatus(counts) {
+  // Create a search query link for bugzilla we can redirect to.
+  function getLink(release, component) {
+    var url = "https://bugzilla.mozilla.org/buglist.cgi?";
+    var args = [["status", "UNCONFIRMED"], ["status", "NEW"], ["status", "ASSIGNED"], ["status", "REOPENED"]];
+    if (release)
+      args.push(["cf_blocking_b2g", release]);
+    if (component)
+      args.push(["component", component]);
+    $.each(args, function (n, arg) {
+        args[n] = encodeURIComponent(arg[0]) + "=" + encodeURIComponent(arg[1]);
+      });
+    return "data-link='" + url + args.join("&") + "'";
+  }
+
+  function formatStatus(counts, component) {
     var html = "<ul id='status'>";
     eachAlphabetically(counts, function (release, count) {
       var canonical = release.replace("+", "").replace("?", "");
-      html += "<li " + getReleaseColor(canonical) + ">";
+      html += "<li " + getReleaseColor(canonical) + " " + getLink(release, component) + ">";
       html += "<div id='release'>" + release + "</div>";
       html += "<div id='count'>" + count + "</div>";
       html += "</li>";
@@ -182,7 +196,7 @@ $(function () {
     var html = "<ul id='teams'>";
     eachAlphabetically(teams, function (team, counts) {
       html += "<li><div>" + team + "</div>";
-      html += formatStatus(counts);
+      html += formatStatus(counts, team);
       html += "</li>";
     });
     html += "</ul>";
@@ -194,7 +208,7 @@ $(function () {
   });
   group(all().blocking(suffix(releases, "+")).open(), ["component", "cf_blocking_b2g"], function (error, counts) {
     if ("General" in counts) {
-      $("li#triage").append(formatStatus(counts.General));
+      $("li#triage").append(formatStatus(counts.General, "General"));
       delete counts.General;
     }
     $("li#blockers").append(formatTeams(counts));

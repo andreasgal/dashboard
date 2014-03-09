@@ -24,6 +24,7 @@ ul#status > li {
   padding: 10px 10px 10px 10px;
   text-align: center;
   font-weight: normal;
+  cursor: pointer;
 }
 ul#teams > li {
   display: inline-block;

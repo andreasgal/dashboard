@@ -1,6 +1,30 @@
 /* -*- Mode: Java; tab-width: 2; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
 /* vim: set shiftwidth=2 tabstop=2 autoindent cindent expandtab: */
 
+var releases = ["1.3", "1.3T", "1.4", "1.5"]; // which releases to show
+var reload = 0; // reload every this many seconds (0 means disabled)
+
+// Parse the url and extract configuration information.
+var parts = window.location.href.split("?");
+if (parts.length > 1) {
+  parts = parts[1].split("&");
+  $.each(parts, function (_, param) {
+    param = param.split("=");
+    if (param.length < 2)
+      return;
+    switch (param[0]) {
+    case "releases":
+      releases = param[1].split(",");
+      break;
+    case "reload":
+      reload = param[1] | 0;
+      break;
+    }
+  });
+}
+
+// JSONP protocol to talk to bugzilla
+
 var _callbacks = [];
 
 function process(data) {
@@ -132,28 +156,6 @@ function group(filter, fields, cb) {
 $("body ul").hide();
 
 function update() {
-  var releases = ["1.3", "1.3T", "1.4", "1.5"];
-  var reload = 0;
-
-  // Parse the url and extract what the user wants to see
-  var parts = window.location.href.split("?");
-  if (parts.length > 1) {
-    parts = parts[1].split("&");
-    $.each(parts, function (_, param) {
-      param = param.split("=");
-      if (param.length < 2)
-        return;
-      switch (param[0]) {
-      case "releases":
-        releases = param[1].split(",");
-        break;
-      case "reload":
-        reload = param[1] | 0;
-        break;
-      }
-    });
-  }
-
   // Assign a unique color and return it as a class declaration
   var getUniqueColor = (function () {
     var color = 0;

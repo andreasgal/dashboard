@@ -47,6 +47,17 @@ function inc(obj, prop) {
   obj[prop]++;
 }
 
+// Accumulate values in a set.
+function accumulate(set) {
+  var sum = 0;
+  $.each(set, function (key, value) {
+    if (typeof value === "object")
+      value = accumulate(value);
+    sum += value;
+  });
+  return sum;
+}
+
 // Append a string to every string in the array.
 function suffix(list, suffix) {
   var result = [];

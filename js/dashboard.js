@@ -89,15 +89,15 @@ function update() {
   })();
 
   group(all().blocking(suffix(releases, "?")).open(), ["cf_blocking_b2g"], function (error, counts) {
-    $("li#noms").empty().append("<div>Nominations</div>").append(formatStatus(counts));
+    $("li#noms").empty().append("<div>Nominations (" + accumulate(counts) + ")</div>").append(formatStatus(counts));
     show();
   });
   group(all().blocking(suffix(releases, "+")).open(), ["component", "cf_blocking_b2g"], function (error, counts) {
     if ("General" in counts) {
-      $("li#triage").empty().append("<div>Triage</div>").append(formatStatus(counts.General, "General"));
+      $("li#triage").empty().append("<div>Triage (" + accumulate(counts.General) + ")</div>").append(formatStatus(counts.General, "General"));
       delete counts.General;
     }
-    $("li#blockers").empty().append("<div>Blockers</div>").append(formatComponents(counts));
+    $("li#blockers").empty().append("<div>Blockers (" + accumulate(counts) + ")</div>").append(formatComponents(counts));
     show();
   });
 

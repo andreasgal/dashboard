@@ -5,23 +5,16 @@ var releases = ["1.3", "1.3T", "1.4", "1.5"]; // which releases to show
 var reload = 0; // reload every this many seconds (0 means disabled)
 
 // Parse the url and extract configuration information.
-var parts = window.location.href.split("?");
-if (parts.length > 1) {
-  parts = parts[1].split("&");
-  $.each(parts, function (_, param) {
-    param = param.split("=");
-    if (param.length < 2)
-      return;
-    switch (param[0]) {
-    case "releases":
-      releases = param[1].split(",");
-      break;
-    case "reload":
-      reload = param[1] | 0;
-      break;
-    }
-  });
-}
+parseQueryString(function (name, value, integer, list) {
+  switch (name) {
+  case "releases":
+    releases = list;
+    break;
+  case "reload":
+    reload = integer;
+    break;
+  }
+});
 
 // Initially hide the body and fade it in when we get some data to show.
 $("body ul").hide();

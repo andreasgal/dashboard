@@ -7,4 +7,7 @@ var OWNERS = {
   "Build Config": "Dylan Oliver",
   "Gaia": "Vivien Nicolas",
   "Gaia::Contacts": "David Scravaglieri",
+  "Gaia::Email": "Andrew Sutherland",
+  "Gaia::Calendar": "James Lal",
+  "Gaia::Camera": "David Flanagan"
 };

@@ -56,6 +56,13 @@ function update() {
     return "href='" + url + args.join("&") + "'";
   }
 
+  // Return the owner of a component.
+  function getOwner(component) {
+    if (component in OWNERS)
+      return OWNERS[component];
+    return "";
+  }
+
   function formatStatus(counts, component) {
     var html = "<ul id='status'>";
     eachAlphabetically(counts, function (release, count) {
@@ -71,7 +78,8 @@ function update() {
   function formatComponents(components) {
     var html = "<ul id='components'>";
     eachAlphabetically(components, function (component, counts) {
-      html += "<li><div>" + component + "</div>";
+      html += "<li>";
+      html += "<div title='" + getOwner(component) + "'>" + component + "</div>";
       html += formatStatus(counts, component);
       html += "</li>";
     });

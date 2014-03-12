@@ -8,7 +8,7 @@ var OWNERS = {
   "DOM: Core & HTML": "Andrew Overholt",
   "DOM": "Andrew Overholt",
   "Gaia": "Vivien Nicolas",
-  "Gaia::Browser": "Gregor Wagner".
+  "Gaia::Browser": "Gregor Wagner",
   "Gaia::Calendar": "Dylan Oliver",
   "Gaia::Camera": "David Flanagan",
   "Gaia::Clock": "Dylan Oliver",

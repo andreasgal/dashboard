@@ -13,12 +13,24 @@ body {
 a {
   outline: none;
 }
-div#splash {
+
+div#menu {
+  display: inline-block;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  text-align: center;
+  top: 0;
+  right: 10px;
 }
+div.checkbox {
+  padding: 10px 10px 10px 10px;
+}
+div.checkbox {
+  display: inline-block;
+  background-color: rgb(231, 76, 60);
+}
+div.checkbox {
+  background-color: #2ecc71;
+}
+
 ul {
   list-style: none;
   font-weight: bold;

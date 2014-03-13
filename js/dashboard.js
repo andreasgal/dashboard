@@ -17,7 +17,7 @@ parseQueryString(function (name, value, integer, list) {
 });
 
 // Initially hide the body and fade it in when we get some data to show.
-$("body ul").hide();
+$("body *").hide();
 
 function update() {
   // Assign a unique color and return it as a class declaration
@@ -91,7 +91,7 @@ function update() {
     var waiting = 2;
     return function () {
       if (--waiting === 0) {
-        $("body ul").fadeIn(400);
+        $("body *").fadeIn(400);
       }
     };
   })();

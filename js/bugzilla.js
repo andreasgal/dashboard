@@ -83,6 +83,12 @@ Filter.prototype = {
     this.status = ["UNCONFIRMED","NEW","ASSIGNED","REOPENED"];
     return this;
   },
+  // filter all unassigned bugs
+  unassigned: function () {
+    this.emailassigned_to1 = 1;
+    this.email1 = "nobody@mozilla.org";
+    return this;
+  },
   // filter all closed bugs
   closed: function () {
     this.status = ["RESOLVED"];

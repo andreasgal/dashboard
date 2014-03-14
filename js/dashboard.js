@@ -108,7 +108,11 @@ function update() {
     $("li#blockers").empty().append("<div>Blockers (" + accumulate(counts) + ")</div>").append(formatComponents(counts));
     show();
   });
-
+  group(all().blocking(suffix(releases, "+")).unassigned().open(), ["component", "cf_blocking_b2g"], function (error, counts) {
+    
+    $("li#unassigned").empty().append("<div>Unassigned (" + accumulate(counts) + ")</div>").append(formatComponents(counts));
+    show();
+  });
   // Reload the data set if requested.
   if (reload) {
     setTimeout(update, reload * 1000);

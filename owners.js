@@ -35,6 +35,7 @@ var OWNERS = {
   "Geolocation": "Doug Turner",
   "JavaScript Engine": "Naveed Ihsanullah",
   "Networking": "Jason Duell",
+  "Panning and Zooming": "Milan Sreckovic",
   "Performance": "Mike Lee",
   "Runtime": "Fabrice Desré",
   "RIL": "Ken Chang",

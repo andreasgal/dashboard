@@ -37,7 +37,7 @@ var OWNERS = {
   "Networking": "Jason Duell",
   "Panning and Zooming": "Milan Sreckovic",
   "Performance": "Mike Lee",
-  "Runtime": "Fabrice Desré",
+  "Runtime": "Gregor Wagner",
   "RIL": "Ken Chang",
   "Graphics": "Milan Sreckovic",
 };

@@ -1,7 +1,7 @@
 /* -*- Mode: Java; tab-width: 2; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
 /* vim: set shiftwidth=2 tabstop=2 autoindent cindent expandtab: */
 
-var releases = ["1.3", "1.3T", "1.4", "1.5"]; // which releases to show
+var releases = ["1.3", "1.3T", "1.4"]; // which releases to show
 var reload = 0; // reload every this many seconds (0 means disabled)
 
 // Parse the url and extract configuration information.
@@ -14,6 +14,17 @@ parseQueryString(function (name, value, integer, list) {
     reload = integer;
     break;
   }
+});
+
+$("div#toggleOwners").click(function () {
+  var checkbox = $(this);
+  checkbox.toggleClass("checked");
+  $("div.component").each(function () {
+    var component = $(this).attr("id");
+    $(this).text((checkbox.hasClass("checked") && (component in OWNERS))
+                 ? OWNERS[component]
+                 : component);
+  });
 });
 
 // Initially hide the body and fade it in when we get some data to show.
@@ -56,20 +67,13 @@ function update() {
     return "href='" + url + args.join("&") + "'";
   }
 
-  // Return the owner of a component.
-  function getOwner(component) {
-    if (component in OWNERS)
-      return OWNERS[component];
-    return "";
-  }
-
   function formatStatus(counts, component) {
     var html = "<ul id='status'>";
     eachAlphabetically(counts, function (release, count) {
       var canonical = release.replace("+", "").replace("?", "");
       html += "<li " + getReleaseColor(canonical) + ">";
-      html += "<div id='release'>" + release + "</div>";
-      html += "<a id='count' " + getLink(release, component) + ">" + count + "</a>";
+      html += "<div class='release'>" + release + "</div>";
+      html += "<a class='count' " + getLink(release, component) + ">" + count + "</a>";
       html += "</li>";
     });
     html += "</ul>";
@@ -79,7 +83,7 @@ function update() {
     var html = "<ul id='components'>";
     eachAlphabetically(components, function (component, counts) {
       html += "<li>";
-      html += "<div title='" + getOwner(component) + "'>" + component + "</div>";
+      html += "<div class='component' id='" + component + "'>" + component + "</div>";
       html += formatStatus(counts, component);
       html += "</li>";
     });

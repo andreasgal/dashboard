@@ -21,15 +21,16 @@ div#menu {
   position: absolute;
   top: 0;
   right: 10px;
+  cursor: pointer;
 }
 div.checkbox {
   padding: 10px 10px 10px 10px;
-}
-div.checkbox {
-  display: inline-block;
   background-color: rgb(231, 76, 60);
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
-div.checkbox {
+div.checkbox.checked {
   background-color: #2ecc71;
 }
 
@@ -57,7 +58,7 @@ ul#components > li {
   padding: 20px 10px 20px 10px;
   text-align: center;
 }
-a#count {
+a.count {
   font-size: 200%;
   font-weight: bold;
   color: white;

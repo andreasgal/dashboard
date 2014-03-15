@@ -76,6 +76,10 @@ a.count {
   background-color: rgb(0, 216, 204);
 }
 
+#unassigned {
+  background-color: rgb(0, 0, 0);
+}
+
 /* Colors for tiles */
 .color0 {
   background-color: rgb(70, 23, 180);

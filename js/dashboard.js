@@ -91,6 +91,12 @@ function update() {
     return html;
   }
 
+  function addquery(element, index, array){
+    element.href += "this.emailassigned_to1 = 1&this.email1 = nobody@mozilla.org";
+  }
+
+
+
   var show = (function () {
     var waiting = 2;
     return function () {
@@ -112,7 +118,15 @@ function update() {
     $("li#blockers").empty().append("<div>Blockers (" + accumulate(counts) + ")</div>").append(formatComponents(counts));
     show();
   });
-
+  group(all().blocking(suffix(releases, "+")).unassigned().open(), ["component", "cf_blocking_b2g"], function (error, counts) {
+    
+    $("li#unassigned").empty().append("<div>Unassigned (" + accumulate(counts) + ")</div>").append(formatComponents(counts));
+    var querylinklist = document.getElementById("unassigned").getElementsByTagName("a");
+    for (var i = 0, link; link = querylinklist[i]; i++) {
+      link.href += "&emailassigned_to1=1&email1=nobody@mozilla.org";
+    }
+    show();
+  });
   // Reload the data set if requested.
   if (reload) {
     setTimeout(update, reload * 1000);

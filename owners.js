@@ -34,10 +34,12 @@ var OWNERS = {
   "General Automation": "Jonathan Griffin",
   "Geolocation": "Doug Turner",
   "JavaScript Engine": "Naveed Ihsanullah",
+  "Layout": "Jet Villegas",
   "Networking": "Jason Duell",
   "Panning and Zooming": "Milan Sreckovic",
   "Performance": "Mike Lee",
   "Runtime": "Gregor Wagner",
   "RIL": "Ken Chang",
   "Graphics": "Milan Sreckovic",
+  "Video/Audio": "Jet Villegas",
 };

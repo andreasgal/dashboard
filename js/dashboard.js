@@ -3,9 +3,7 @@
 
 var releases = ["1.3", "1.3T", "1.4"]; // which releases to show
 var reload = 0; // reload every this many seconds (0 means disabled)
-var showOwners = false; // show the owner instead of the component
-var showActivity = false; // use age of least active bug to color tile instead of release color
-var maxAge = 7; // maximum age in days (deep red for showActivity)
+var maxAge = 7; // maximum age in days (deep red when showing activity)
 
 // Flags we will filter by and the results of the bug queries.
 var nomination_flag = suffix(releases, "?");
@@ -24,10 +22,10 @@ parseQueryString(function (name, value, integer, list) {
     reload = integer;
     break;
   case "owners":
-    showOwners = true;
+    $("div#toggleOwners").toggleClass("checked");
     break;
   case "activity":
-    showActivity = true;
+    $("div#toggleActivity").toggleClass("checked");
     break;
   case "maxage":
     maxAge = integer;
@@ -38,10 +36,9 @@ parseQueryString(function (name, value, integer, list) {
 // Initially hide the body and fade it in when we get some data to show.
 $("body").hide();
 
-$("div#toggleOwners").click(function () {
+$("div#toggleOwners, div#toggleActivity").click(function () {
   var checkbox = $(this);
   checkbox.toggleClass("checked");
-  showOwners = checkbox.hasClass("checked");
   refresh();
 });
 
@@ -132,6 +129,7 @@ function refresh() {
   }
   function formatStatus(counts, component) {
     var html = "<ul id='status'>";
+    var showActivity = $("div#toggleActivity").hasClass("checked");
     eachAlphabetically(counts, function (release, count) {
       var color;
       if (showActivity) {
@@ -158,6 +156,7 @@ function refresh() {
   }
   function formatComponents(components) {
     var html = "<ul id='components'>";
+    var showOwners = $("div#toggleOwners").hasClass("checked");
     eachAlphabetically(components, function (component, counts) {
       var label = (showOwners && (component in OWNERS))
                   ? OWNERS[component]

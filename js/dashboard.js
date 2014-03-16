@@ -3,6 +3,14 @@
 
 var releases = ["1.3", "1.3T", "1.4"]; // which releases to show
 var reload = 0; // reload every this many seconds (0 means disabled)
+var showOwners = false;
+
+// Flags we will filter by and the results of the bug queries.
+var nomination_flag = suffix(releases, "?");
+var blocking_flag = suffix(releases, "+");
+var nominations;
+var untriaged;
+var blocking;
 
 // Parse the url and extract configuration information.
 parseQueryString(function (name, value, integer, list) {
@@ -13,6 +21,9 @@ parseQueryString(function (name, value, integer, list) {
   case "reload":
     reload = integer;
     break;
+  case "owners":
+    showOwners = true;
+    break;
   }
 });
 
@@ -22,12 +33,8 @@ $("body").hide();
 $("div#toggleOwners").click(function () {
   var checkbox = $(this);
   checkbox.toggleClass("checked");
-  $("div.component").each(function () {
-    var component = $(this).attr("id");
-    $(this).text((checkbox.hasClass("checked") && (component in OWNERS))
-                 ? OWNERS[component]
-                 : component);
-  });
+  showOwners = checkbox.hasClass("checked");
+  refresh();
 });
 
 $("div#toggleHelp").click(function () {
@@ -37,7 +44,7 @@ $("div#toggleHelp").click(function () {
 });
 $("div#help").hide();
 
-function update() {
+function refresh() {
   // Assign a unique color and return it as a class declaration
   var getUniqueColor = (function () {
     var color = 0;
@@ -121,8 +128,11 @@ function update() {
   function formatComponents(components) {
     var html = "<ul id='components'>";
     eachAlphabetically(components, function (component, counts) {
+      var label = (showOwners && (component in OWNERS))
+                  ? OWNERS[component]
+                  : component;
       html += "<li>";
-      html += "<div class='component' id='" + component + "'>" + component + "</div>";
+      html += "<div class='component'>" + label + "</div>";
       html += formatStatus(counts, component);
       html += "</li>";
     });
@@ -130,27 +140,36 @@ function update() {
     return html;
   }
 
-  var nom_flag = suffix(releases, "?");
-  var block_flag = suffix(releases, "+");
+  $("li#noms").empty().append("<div>Nominations: " +
+                              formatCounts(null, nomination_flag, null, nominations) +
+                              "</div>").append(formatStatus(nominations));
+  if (untriaged) {
+    $("li#triage").empty().append("<div>Triage: " +
+                                  formatCounts(null, blocking_flag, "General", untriaged) +
+                                  "</div>").append(formatStatus(untriaged, "General"));
+  }
+  $("li#blockers").empty().append("<div>Blockers: " +
+                                  formatCounts(null, blocking_flag, null, blocking) +
+                                  "</div>").append(formatComponents(blocking));
+}
+
+function update() {
+  function without(obj, field) {
+    obj = $.extend(true, {}, obj);
+    delete obj.field;
+    return obj;
+  }
 
   $.when(
-    group(all().blocking(nom_flag).open(), ["cf_blocking_b2g", "assigned_to"]).then(function (counts) {
-      $("li#noms").empty().append("<div>Nominations: " +
-                                  formatCounts(null, nom_flag, null, counts) +
-                                  "</div>").append(formatStatus(counts));
+    group(all().blocking(nomination_flag).open(), ["cf_blocking_b2g", "assigned_to"]).then(function (counts) {
+      nominations = counts;
     }),
-    group(all().blocking(block_flag).open(), ["component", "cf_blocking_b2g", "assigned_to"]).then(function (counts) {
-      if ("General" in counts) {
-        $("li#triage").empty().append("<div>Triage: " +
-                                      formatCounts(null, block_flag, "General", counts.General) +
-                                      "</div>").append(formatStatus(counts.General, "General"));
-        delete counts.General;
-      }
-      $("li#blockers").empty().append("<div>Blockers: " +
-                                      formatCounts(null, block_flag, null, counts) +
-                                      "</div>").append(formatComponents(counts));
+    group(all().blocking(blocking_flag).open(), ["component", "cf_blocking_b2g", "assigned_to"]).then(function (counts) {
+      untriaged = ("General" in counts) ? counts.General : null;
+      blocking = without(counts, "General");
     })
   ).then(function() {
+    refresh();
     $("body").fadeIn(400);
   });
 

@@ -32,11 +32,15 @@ parseQueryString(function (name, value, integer, bool, list) {
 });
 
 // Flags we will filter by and the results of the bug queries.
-var nomination_flag = suffix(config.releases, "?");
-var blocking_flag = suffix(config.releases, "+");
-var nominations;
-var untriaged;
-var blocking;
+config.nomination_value = suffix(config.releases, "?");
+config.blocking_value = suffix(config.releases, "+");
+
+// Last fetched data model.
+var data = {
+  nominations: [],
+  untriaged: [],
+  blocking: []
+};
 
 // Initially hide the body and fade it in when we get some data to show.
 $("body").hide();
@@ -176,16 +180,16 @@ function refresh() {
   }
 
   $("li#noms").empty().append("<div>Nominations: " +
-                              formatCounts(null, nomination_flag, null, nominations) +
-                              "</div>").append(formatStatus(nominations));
-  if (untriaged) {
+                              formatCounts(null, config.nomination_value, null, data.nominations) +
+                              "</div>").append(formatStatus(data.nominations));
+  if (data.untriaged) {
     $("li#triage").empty().append("<div>Triage: " +
-                                  formatCounts(null, blocking_flag, "General", untriaged) +
-                                  "</div>").append(formatStatus(untriaged, "General"));
+                                  formatCounts(null, config.blocking_value, "General", data.untriaged) +
+                                  "</div>").append(formatStatus(data.untriaged, "General"));
   }
   $("li#blockers").empty().append("<div>Blockers: " +
-                                  formatCounts(null, blocking_flag, null, blocking) +
-                                  "</div>").append(formatComponents(blocking));
+                                  formatCounts(null, config.blocking_value, null, data.blocking) +
+                                  "</div>").append(formatComponents(data.blocking));
 }
 
 function update() {
@@ -196,12 +200,12 @@ function update() {
   }
 
   $.when(
-    group(all().blocking(nomination_flag).open(), [config.flag, "assigned_to", "last_change_time"]).then(function (counts) {
-      nominations = counts;
+    group(all().blocking(config.nomination_value).open(), [config.flag, "assigned_to", "last_change_time"]).then(function (counts) {
+      data.nominations = counts;
     }),
-    group(all().blocking(blocking_flag).open(), ["component", config.flag, "assigned_to", "last_change_time"]).then(function (counts) {
-      untriaged = ("General" in counts) ? counts.General : null;
-      blocking = without(counts, "General");
+    group(all().blocking(config.blocking_value).open(), ["component", config.flag, "assigned_to", "last_change_time"]).then(function (counts) {
+      data.untriaged = ("General" in counts) ? counts.General : null;
+      data.blocking = without(counts, "General");
     })
   ).then(function() {
     refresh();

@@ -59,7 +59,7 @@ function accumulate(v, filter) {
   var sum = 0;
   $.each(v, function (key, value) {
     if (typeof value === "object") {
-      sum += accumulate(value, filter);
+      sum += accumulate(value, (!filter || key === filter) ? "" : filter);
       return;
     }
     if (!filter || key === filter)

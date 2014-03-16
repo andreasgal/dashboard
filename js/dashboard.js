@@ -3,7 +3,9 @@
 
 var releases = ["1.3", "1.3T", "1.4"]; // which releases to show
 var reload = 0; // reload every this many seconds (0 means disabled)
-var showOwners = false;
+var showOwners = false; // show the owner instead of the component
+var showActivity = false; // use age of least active bug to color tile instead of release color
+var maxAge = 7; // maximum age in days (deep red for showActivity)
 
 // Flags we will filter by and the results of the bug queries.
 var nomination_flag = suffix(releases, "?");
@@ -23,6 +25,12 @@ parseQueryString(function (name, value, integer, list) {
     break;
   case "owners":
     showOwners = true;
+    break;
+  case "activity":
+    showActivity = true;
+    break;
+  case "maxage":
+    maxAge = integer;
     break;
   }
 });
@@ -63,6 +71,15 @@ function refresh() {
       return colors[canonical];
     };
   })();
+
+  function rgb(r, g, b) {
+    return "rgb(" + Math.round(255 * r) + "," + Math.round(255 * g) + "," + Math.round(255 * b) + ")";
+  }
+
+  // Get a color based on a status (0..1, 0 is red, 1 is green).
+  function getStatusColor(status) {
+    return "style='background-color: " + rgb(1-status, status, 0) + "'";
+  }
 
   // Create a search query link for bugzilla we can redirect to.
   function getLink(release, component, assigned_to) {
@@ -116,8 +133,22 @@ function refresh() {
   function formatStatus(counts, component) {
     var html = "<ul id='status'>";
     eachAlphabetically(counts, function (release, count) {
-      var canonical = release.replace("+", "").replace("?", "");
-      html += "<li " + getReleaseColor(canonical) + ">";
+      var color;
+      if (showActivity) {
+        // Determine the oldest activity.
+        var oldest = Date.now();
+        $.each(count, function (assigned_to, dates) {
+          $.each(dates, function (date) {
+            oldest = Math.min(new Date(date).getTime(), oldest);
+          });
+        });
+        // Calculate the age in days and cap to 7 days.
+        var age = Math.min(maxAge, (Date.now() - oldest) / 1000 / 60 / 60 / 24);
+        color = getStatusColor(1 - age / maxAge);
+      } else {
+        color = getReleaseColor(release.replace("+", "").replace("?", ""));
+      }
+      html += "<li " + color + ">";
       html += "<div class='release'>" + release + "</div>";
       html += formatCounts("count", release, component, count);
       html += "</li>";
@@ -161,10 +192,10 @@ function update() {
   }
 
   $.when(
-    group(all().blocking(nomination_flag).open(), ["cf_blocking_b2g", "assigned_to"]).then(function (counts) {
+    group(all().blocking(nomination_flag).open(), ["cf_blocking_b2g", "assigned_to", "last_change_time"]).then(function (counts) {
       nominations = counts;
     }),
-    group(all().blocking(blocking_flag).open(), ["component", "cf_blocking_b2g", "assigned_to"]).then(function (counts) {
+    group(all().blocking(blocking_flag).open(), ["component", "cf_blocking_b2g", "assigned_to", "last_change_time"]).then(function (counts) {
       untriaged = ("General" in counts) ? counts.General : null;
       blocking = without(counts, "General");
     })

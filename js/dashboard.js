@@ -1,19 +1,21 @@
 /* -*- Mode: Java; tab-width: 2; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
 /* vim: set shiftwidth=2 tabstop=2 autoindent cindent expandtab: */
 
-var releases = ["1.3", "1.3T", "1.4"]; // which releases to show
-var flag = "cf_blocking_b2g"; // name of the release flag to use
-var reload = 0; // reload every this many seconds (0 means disabled)
-var maxAge = 7; // maximum age in days (deep red when showing activity)
+var config = {
+  releases: ["1.3", "1.3T", "1.4"], // which releases to show
+  flag: "cf_blocking_b2g", // name of the release flag to use
+  reload: 0, // reload every this many seconds (0 means disabled)
+  maxAge: 7 // maximum age in days (deep red when showing activity)
+};
 
 // Parse the url and extract configuration information.
 parseQueryString(function (name, value, integer, bool, list) {
   switch (name) {
   case "releases":
-    releases = list;
+    config.releases = list;
     break;
   case "reload":
-    reload = integer;
+    config.reload = integer;
     break;
   case "owners":
   case "activity":
@@ -21,17 +23,17 @@ parseQueryString(function (name, value, integer, bool, list) {
       $("div#toggle" + name.charAt(0).toUpperCase() + name.slice(1)).addClass("checked");
     break;
   case "maxage":
-    maxAge = integer;
+    config.maxAge = integer;
     break;
   case "flag":
-    flag = value;
+    config.flag = value;
     break;
   }
 });
 
 // Flags we will filter by and the results of the bug queries.
-var nomination_flag = suffix(releases, "?");
-var blocking_flag = suffix(releases, "+");
+var nomination_flag = suffix(config.releases, "?");
+var blocking_flag = suffix(config.releases, "+");
 var nominations;
 var untriaged;
 var blocking;
@@ -98,7 +100,7 @@ function refresh() {
 
     push("bug_status", ["UNCONFIRMED", "NEW", "ASSIGNED", "REOPENED"]);
     if (release)
-      push(flag, release);
+      push(config.flag, release);
     if (component)
       push("component", component);
     if (assigned_to)
@@ -144,8 +146,8 @@ function refresh() {
           });
         });
         // Calculate the age in days and cap to 7 days.
-        var age = Math.min(maxAge, (Date.now() - oldest) / 1000 / 60 / 60 / 24);
-        color = getStatusColor(1 - age / maxAge);
+        var age = Math.min(config.maxAge, (Date.now() - oldest) / 1000 / 60 / 60 / 24);
+        color = getStatusColor(1 - age / config.maxAge);
       } else {
         color = getReleaseColor(release.replace("+", "").replace("?", ""));
       }
@@ -194,10 +196,10 @@ function update() {
   }
 
   $.when(
-    group(all().blocking(nomination_flag).open(), [flag, "assigned_to", "last_change_time"]).then(function (counts) {
+    group(all().blocking(nomination_flag).open(), [config.flag, "assigned_to", "last_change_time"]).then(function (counts) {
       nominations = counts;
     }),
-    group(all().blocking(blocking_flag).open(), ["component", flag, "assigned_to", "last_change_time"]).then(function (counts) {
+    group(all().blocking(blocking_flag).open(), ["component", config.flag, "assigned_to", "last_change_time"]).then(function (counts) {
       untriaged = ("General" in counts) ? counts.General : null;
       blocking = without(counts, "General");
     })
@@ -207,8 +209,8 @@ function update() {
   });
 
   // Reload the data set if requested.
-  if (reload) {
-    setTimeout(update, reload * 1000);
+  if (config.reload) {
+    setTimeout(update, config.reload * 1000);
   }
 }
 

@@ -55,15 +55,17 @@ function inc(obj, prop) {
 }
 
 // Accumulate values in a set.
-function accumulate(v) {
-  if (typeof v === "object") {
-    var sum = 0;
-    $.each(v, function (key, value) {
-      sum += accumulate(value);
-    });
-    return sum;
-  }
-  return v;
+function accumulate(v, filter) {
+  var sum = 0;
+  $.each(v, function (key, value) {
+    if (typeof value === "object") {
+      sum += accumulate(value, filter);
+      return;
+    }
+    if (!filter || key === filter)
+      sum += value;
+  });
+  return sum;
 }
 
 // Append a string to every string in the array.

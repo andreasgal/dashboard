@@ -94,8 +94,9 @@ function update() {
   }
   function formatCounts(className, release, component, count) {
     var html = formatCount(className, release, component, null, accumulate(count));
-    if ("nobody@mozilla.org" in count)
-      html += formatCount(className + ".unassigned", release, component, "nobody@mozilla.org", brace(accumulate(count["nobody@mozilla.org"])));
+    var unassigned = accumulate(count, "nobody@mozilla.org");
+    if (unassigned > 0)
+      html += formatCount(className + ".unassigned", release, component, "nobody@mozilla.org", brace(unassigned));
     return html;
   }
   function formatStatus(counts, component) {
@@ -128,18 +129,18 @@ function update() {
   $.when(
     group(all().blocking(nom_flag).open(), ["cf_blocking_b2g", "assigned_to"]).then(function (counts) {
       $("li#noms").empty().append("<div>Nominations: " +
-                                  formatCount(null, nom_flag, null, null, accumulate(counts)) +
+                                  formatCounts(null, nom_flag, null, counts) +
                                   "</div>").append(formatStatus(counts));
     }),
     group(all().blocking(block_flag).open(), ["component", "cf_blocking_b2g", "assigned_to"]).then(function (counts) {
       if ("General" in counts) {
         $("li#triage").empty().append("<div>Triage: " +
-                                      formatCount(null, block_flag, "General", null, accumulate(counts.General)) +
+                                      formatCounts(null, block_flag, "General", counts.General) +
                                       "</div>").append(formatStatus(counts.General, "General"));
         delete counts.General;
       }
       $("li#blockers").empty().append("<div>Blockers: " +
-                                      formatCount(null, block_flag, null, null, accumulate(counts)) +
+                                      formatCounts(null, block_flag, null, counts) +
                                       "</div>").append(formatComponents(counts));
     })
   ).then(function() {

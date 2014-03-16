@@ -13,31 +13,31 @@ function process(data) {
 var query = (function () {
   var gen = 0;
   return function (method, params) {
-    var deferred = $.Deferred();
-    _callbacks[gen] = function (error, result) {
-      if (error)
-        deferred.reject(error);
-      else
-        deferred.resolve(result);
-    };
-    var request = {
-      method: method, 
-      id: (gen++),
-      callback: "process"
-    };
-    if (params) {
-      request.params = JSON.stringify(params);
-    }
-    var args = [];
-    $.each(request, function (field, value) {
-      args.push(encodeURIComponent(field) + "=" + encodeURIComponent(value));
+    return $.Deferred(function (deferred) {
+      _callbacks[gen] = function (error, result) {
+        if (error)
+          deferred.reject(error);
+        else
+          deferred.resolve(result);
+      };
+      var request = {
+        method: method,
+        id: (gen++),
+        callback: "process"
+      };
+      if (params) {
+        request.params = JSON.stringify(params);
+      }
+      var args = [];
+      $.each(request, function (field, value) {
+        args.push(encodeURIComponent(field) + "=" + encodeURIComponent(value));
+      });
+      var script = document.createElement('script');
+      script.type = "text/javascript";
+      script.src = "http://bugzilla.mozilla.org/jsonrpc.cgi?" + args.join("&");
+      script.defer = true;
+      document.head.appendChild(script);
     });
-    var script = document.createElement('script');
-    script.type = "text/javascript";
-    script.src = "http://bugzilla.mozilla.org/jsonrpc.cgi?" + args.join("&");
-    script.defer = true;
-    document.head.appendChild(script);
-    return deferred;
   };
 })();
 
@@ -143,5 +143,25 @@ function group(filter, fields, cb) {
       inc(ptr, bug[last]);
     });
     return counts;
+  });
+}
+
+// Slice an array into chunks of size 'chunkSize'
+function chunk(array, chunkSize) {
+  return [].concat.apply([],
+                         array.map(function (e, i) {
+                           return i % chunkSize ? [] : [array.slice(i, i + chunkSize)];
+                         }));
+}
+
+// Get history for a set of bugs.
+function history(bugs) {
+  var total = [];
+  return $.when.apply($, chunk(bugs, 400).map(function (chunk) {
+    return query("Bug.history", [{ids: chunk}]).then(function (more) {
+      total = total.concat(more.bugs);
+    });
+  })).then(function () {
+    return total;
   });
 }

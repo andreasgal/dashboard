@@ -6,7 +6,7 @@ var reload = 0; // reload every this many seconds (0 means disabled)
 var maxAge = 7; // maximum age in days (deep red when showing activity)
 
 // Parse the url and extract configuration information.
-parseQueryString(function (name, value, integer, list) {
+parseQueryString(function (name, value, integer, bool, list) {
   switch (name) {
   case "releases":
     releases = list;
@@ -15,10 +15,9 @@ parseQueryString(function (name, value, integer, list) {
     reload = integer;
     break;
   case "owners":
-    $("div#toggleOwners").toggleClass("checked");
-    break;
   case "activity":
-    $("div#toggleActivity").toggleClass("checked");
+    if (bool)
+      $("div#toggle" + name.charAt(0).toUpperCase() + name.slice(1)).addClass("checked");
     break;
   case "maxage":
     maxAge = integer;

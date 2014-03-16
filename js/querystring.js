@@ -10,7 +10,11 @@ function parseQueryString(cb) {
       if (param.length < 2)
         return;
       var value = param[1];
-      cb(param[0], value, value | 0, value.split(","));
+      cb(param[0],
+         value,
+         value | 0,
+         (value === "yes" || value === "true" || value === 1),
+         value.split(","));
     });
   }
 }

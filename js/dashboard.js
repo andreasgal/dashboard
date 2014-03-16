@@ -73,7 +73,7 @@ function update() {
       var canonical = release.replace("+", "").replace("?", "");
       html += "<li " + getReleaseColor(canonical) + ">";
       html += "<div class='release'>" + release + "</div>";
-      html += "<a class='count' " + getLink(release, component) + ">" + count + "</a>";
+      html += "<a class='count' " + getLink(release, component) + ">" + accumulate(count) + "</a>";
       html += "</li>";
     });
     html += "</ul>";
@@ -95,7 +95,7 @@ function update() {
     group(all().blocking(suffix(releases, "?")).open(), ["cf_blocking_b2g"]).then(function (counts) {
       $("li#noms").empty().append("<div>Nominations (" + accumulate(counts) + ")</div>").append(formatStatus(counts));
     }),
-    group(all().blocking(suffix(releases, "+")).open(), ["component", "cf_blocking_b2g"]).then(function (counts) {
+    group(all().blocking(suffix(releases, "+")).open(), ["component", "cf_blocking_b2g", "assigned_to"]).then(function (counts) {
       if ("General" in counts) {
         $("li#triage").empty().append("<div>Triage (" + accumulate(counts.General) + ")</div>").append(formatStatus(counts.General, "General"));
         delete counts.General;

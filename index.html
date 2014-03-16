@@ -2,7 +2,7 @@
 <html lang="en-US">
   <head>
     <title>
-      Firefox OS Release Dashboard
+      Release Dashboard
     </title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,7 +24,7 @@
     </div>
     <div id="help">
       <p>
-	This is a simple dashboard to show the current release status of Firefox OS.
+	This is a simple dashboard to show the current release status based on bugzilla information.
       </p>
       <p>
 	Nominations indicate bugs that have <b>blocking?</b> set for any of the selected releases.<br>
@@ -38,6 +38,7 @@
 	<b>Advanced features:</b><br>
 	The dashboard can be configured by appending query parameters to the url using "?". Separate parameters with a "&".<br>
 	<i>"releases=1.3,1.3T"</i> displays only those releases.<br>
+	<i>"flag=cf_blocking_loop"</i> uses the specified release flag instead of the default of <i>cf_blocking_b2g</i>.</br>
 	<i>"reload=60"</i> reloads the page automatically every 60 seconds.<br>
 	<i>"owners=true"</i> selects the <b>Show Owners</b> checkbox at load time.</br>
 	<i>"activity=true"</i> selects the <b>Show Activity</b> checkbox at load time.</br>

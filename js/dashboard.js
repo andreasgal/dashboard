@@ -2,6 +2,7 @@
 /* vim: set shiftwidth=2 tabstop=2 autoindent cindent expandtab: */
 
 var releases = ["1.3", "1.3T", "1.4"]; // which releases to show
+var flag = "cf_blocking_b2g"; // name of the release flag to use
 var reload = 0; // reload every this many seconds (0 means disabled)
 var maxAge = 7; // maximum age in days (deep red when showing activity)
 
@@ -21,6 +22,9 @@ parseQueryString(function (name, value, integer, bool, list) {
     break;
   case "maxage":
     maxAge = integer;
+    break;
+  case "flag":
+    flag = value;
     break;
   }
 });
@@ -94,7 +98,7 @@ function refresh() {
 
     push("bug_status", ["UNCONFIRMED", "NEW", "ASSIGNED", "REOPENED"]);
     if (release)
-      push("cf_blocking_b2g", release);
+      push(flag, release);
     if (component)
       push("component", component);
     if (assigned_to)
@@ -190,10 +194,10 @@ function update() {
   }
 
   $.when(
-    group(all().blocking(nomination_flag).open(), ["cf_blocking_b2g", "assigned_to", "last_change_time"]).then(function (counts) {
+    group(all().blocking(nomination_flag).open(), [flag, "assigned_to", "last_change_time"]).then(function (counts) {
       nominations = counts;
     }),
-    group(all().blocking(blocking_flag).open(), ["component", "cf_blocking_b2g", "assigned_to", "last_change_time"]).then(function (counts) {
+    group(all().blocking(blocking_flag).open(), ["component", flag, "assigned_to", "last_change_time"]).then(function (counts) {
       untriaged = ("General" in counts) ? counts.General : null;
       blocking = without(counts, "General");
     })

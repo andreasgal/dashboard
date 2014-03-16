@@ -33,6 +33,7 @@ var OWNERS = {
   "Gaia::System::Window Mgmt": "Tim Chien",
   "General Automation": "Jonathan Griffin",
   "Geolocation": "Doug Turner",
+  "Hardware Abstraction Layer (HAL)": "Dave Hylands",
   "JavaScript Engine": "Naveed Ihsanullah",
   "Layout": "Jet Villegas",
   "Networking": "Jason Duell",

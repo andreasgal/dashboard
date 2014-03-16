@@ -53,16 +53,25 @@ function update() {
   // Create a search query link for bugzilla we can redirect to.
   function getLink(release, component, assigned_to) {
     var url = "https://bugzilla.mozilla.org/buglist.cgi?";
-    var args = [["bug_status", "UNCONFIRMED"],
-                ["bug_status", "NEW"],
-                ["bug_status", "ASSIGNED"],
-                ["bug_status", "REOPENED"]];
+    var args = [];
+
+    function push(field, value) {
+      if (typeof value === "object") {
+        $.each(value, function (_, v) {
+          push(field, v);
+        });
+        return;
+      }
+      args.push([field, value]);
+    }
+
+    push("bug_status", ["UNCONFIRMED", "NEW", "ASSIGNED", "REOPENED"]);
     if (release)
-      args.push(["cf_blocking_b2g", release]);
+      push("cf_blocking_b2g", release);
     if (component)
-      args.push(["component", component]);
+      push("component", component);
     if (assigned_to)
-      args.push(["assigned_to", assigned_to]);
+      push("assigned_to", assigned_to);
     $.each(args, function (n, arg) {
         args[n] = encodeURIComponent(arg[0]) + "=" + encodeURIComponent(arg[1]);
       });
@@ -70,9 +79,15 @@ function update() {
   }
 
   function formatCount(className, release, component, assigned_to, count) {
-    return "<a class='" + className + "' " + getLink(release, component, assigned_to) + ">" + count + "</a>";
+    var html = "<a";
+    if (className)
+      html += " class='" + className + "'";
+    html += " " + getLink(release, component, assigned_to);
+    html += ">";
+    html += count;
+    html += "</a>";
+    return html;
   }
-
   function formatStatus(counts, component) {
     var html = "<ul id='status'>";
     eachAlphabetically(counts, function (release, count) {
@@ -99,16 +114,23 @@ function update() {
     return html;
   }
 
+  var nom_flag = suffix(releases, "?");
+  var block_flag = suffix(releases, "+");
+
   $.when(
-    group(all().blocking(suffix(releases, "?")).open(), ["cf_blocking_b2g", "assigned_to"]).then(function (counts) {
-      $("li#noms").empty().append("<div>Nominations (" + accumulate(counts) + ")</div>").append(formatStatus(counts));
+    group(all().blocking(nom_flag).open(), ["cf_blocking_b2g", "assigned_to"]).then(function (counts) {
+      $("li#noms").empty().append("<div>Nominations: " +
+                                  formatCount(null, nom_flag, null, null, accumulate(counts)) +
+                                  "</div>").append(formatStatus(counts));
     }),
-    group(all().blocking(suffix(releases, "+")).open(), ["component", "cf_blocking_b2g", "assigned_to"]).then(function (counts) {
+    group(all().blocking(block_flag).open(), ["component", "cf_blocking_b2g", "assigned_to"]).then(function (counts) {
       if ("General" in counts) {
-        $("li#triage").empty().append("<div>Triage (" + accumulate(counts.General) + ")</div>").append(formatStatus(counts.General, "General"));
+        $("li#triage").empty().append("<div>Triage: " +
+                                      formatCount(null, block_flag, "General", null, accumulate(counts.General)) +
+                                      "</div>").append(formatStatus(counts.General, "General"));
         delete counts.General;
       }
-      $("li#blockers").empty().append("<div>Blockers (" + accumulate(counts) + ")</div>").append(formatComponents(counts));
+      $("li#blockers").empty().append("<div>Blockers: " + accumulate(counts) + "</div>").append(formatComponents(counts));
     })
   ).then(function() {
     $("body").fadeIn(400);

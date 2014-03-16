@@ -78,6 +78,10 @@ function update() {
     return "href='" + url + args.join("&") + "'";
   }
 
+  function brace(s) {
+    return "(" + s + ")";
+  }
+
   function formatCount(className, release, component, assigned_to, count) {
     var html = "<a";
     if (className)
@@ -96,7 +100,7 @@ function update() {
       html += "<div class='release'>" + release + "</div>";
       html += formatCount("count", release, component, null, accumulate(count));
       if ("nobody@mozilla.org" in count)
-        html += formatCount("unassigned", release, component, "nobody@mozilla.org", "(" + accumulate(count["nobody@mozilla.org"]) + ")");
+        html += formatCount("unassigned", release, component, "nobody@mozilla.org", brace(accumulate(count["nobody@mozilla.org"])));
       html += "</li>";
     });
     html += "</ul>";

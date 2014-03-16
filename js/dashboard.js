@@ -96,7 +96,7 @@ function update() {
     var html = formatCount(className, release, component, null, accumulate(count));
     var unassigned = accumulate(count, "nobody@mozilla.org");
     if (unassigned > 0)
-      html += " " + formatCount(className + ".unassigned", release, component, "nobody@mozilla.org", brace(unassigned));
+      html += " " + formatCount(className + " unassigned", release, component, "nobody@mozilla.org", brace(unassigned));
     return html;
   }
   function formatStatus(counts, component) {

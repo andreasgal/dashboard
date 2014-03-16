@@ -5,13 +5,6 @@ var releases = ["1.3", "1.3T", "1.4"]; // which releases to show
 var reload = 0; // reload every this many seconds (0 means disabled)
 var maxAge = 7; // maximum age in days (deep red when showing activity)
 
-// Flags we will filter by and the results of the bug queries.
-var nomination_flag = suffix(releases, "?");
-var blocking_flag = suffix(releases, "+");
-var nominations;
-var untriaged;
-var blocking;
-
 // Parse the url and extract configuration information.
 parseQueryString(function (name, value, integer, list) {
   switch (name) {
@@ -32,6 +25,13 @@ parseQueryString(function (name, value, integer, list) {
     break;
   }
 });
+
+// Flags we will filter by and the results of the bug queries.
+var nomination_flag = suffix(releases, "?");
+var blocking_flag = suffix(releases, "+");
+var nominations;
+var untriaged;
+var blocking;
 
 // Initially hide the body and fade it in when we get some data to show.
 $("body").hide();

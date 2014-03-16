@@ -91,26 +91,19 @@ function update() {
     return html;
   }
 
-  var show = (function () {
-    var waiting = 2;
-    return function () {
-      if (--waiting === 0) {
-        $("body").fadeIn(400);
+  $.when(
+    group(all().blocking(suffix(releases, "?")).open(), ["cf_blocking_b2g"]).then(function (counts) {
+      $("li#noms").empty().append("<div>Nominations (" + accumulate(counts) + ")</div>").append(formatStatus(counts));
+    }),
+    group(all().blocking(suffix(releases, "+")).open(), ["component", "cf_blocking_b2g"]).then(function (counts) {
+      if ("General" in counts) {
+        $("li#triage").empty().append("<div>Triage (" + accumulate(counts.General) + ")</div>").append(formatStatus(counts.General, "General"));
+        delete counts.General;
       }
-    };
-  })();
-
-  group(all().blocking(suffix(releases, "?")).open(), ["cf_blocking_b2g"]).then(function (counts) {
-    $("li#noms").empty().append("<div>Nominations (" + accumulate(counts) + ")</div>").append(formatStatus(counts));
-    show();
-  });
-  group(all().blocking(suffix(releases, "+")).open(), ["component", "cf_blocking_b2g"]).then(function (counts) {
-    if ("General" in counts) {
-      $("li#triage").empty().append("<div>Triage (" + accumulate(counts.General) + ")</div>").append(formatStatus(counts.General, "General"));
-      delete counts.General;
-    }
-    $("li#blockers").empty().append("<div>Blockers (" + accumulate(counts) + ")</div>").append(formatComponents(counts));
-    show();
+      $("li#blockers").empty().append("<div>Blockers (" + accumulate(counts) + ")</div>").append(formatComponents(counts));
+    })
+  ).then(function() {
+    $("body").fadeIn(400);
   });
 
   // Reload the data set if requested.

@@ -130,7 +130,9 @@ function update() {
                                       "</div>").append(formatStatus(counts.General, "General"));
         delete counts.General;
       }
-      $("li#blockers").empty().append("<div>Blockers: " + accumulate(counts) + "</div>").append(formatComponents(counts));
+      $("li#blockers").empty().append("<div>Blockers: " +
+                                      formatCount(null, block_flag, null, null, accumulate(counts)) +
+                                      "</div>").append(formatComponents(counts));
     })
   ).then(function() {
     $("body").fadeIn(400);

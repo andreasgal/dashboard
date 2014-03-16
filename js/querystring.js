@@ -9,7 +9,7 @@ function parseQueryString(cb) {
       param = param.split("=");
       if (param.length < 2)
         return;
-      var value = param[1];
+      var value = decodeURIComponent(param[1]);
       cb(param[0],
          value,
          value | 0,

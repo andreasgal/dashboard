@@ -19,6 +19,14 @@
   <body>
     <div id="menu">
       <div class="checkbox" id="toggleOwners">Show owners</div>
+      <div class="checkbox" id="toggleHelp">Help</div>
+    </div>
+    <div id="help">
+      This is a simple dashboard to show the current release status of Firefox OS.<br>
+      Nominations indicate bugs that have <b>blocking?</b> set for any of the selected releases.<br>
+      Triage indicates bugs that have been marked <b>blocking+</b> and are awaiting triage in the "General" component.<br>
+      Each number in parenthesis indicates the number of <b>unassigned</b> bugs.<br>
+      Clicking on any of the numbers takes you to a bugzilla query listing those bugs.
     </div>
     <ul>
       <li id="noms"></li>

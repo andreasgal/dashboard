@@ -16,6 +16,9 @@ parseQueryString(function (name, value, integer, list) {
   }
 });
 
+// Initially hide the body and fade it in when we get some data to show.
+$("body").hide();
+
 $("div#toggleOwners").click(function () {
   var checkbox = $(this);
   checkbox.toggleClass("checked");
@@ -27,8 +30,12 @@ $("div#toggleOwners").click(function () {
   });
 });
 
-// Initially hide the body and fade it in when we get some data to show.
-$("body").hide();
+$("div#toggleHelp").click(function () {
+  var checkbox = $(this);
+  checkbox.toggleClass("checked");
+  $("div#help").toggle(400);
+});
+$("div#help").hide();
 
 function update() {
   // Assign a unique color and return it as a class declaration

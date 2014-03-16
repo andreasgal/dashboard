@@ -12,8 +12,14 @@ function process(data) {
 
 var query = (function () {
   var gen = 0;
-  return function (method, params, cb) {
-    _callbacks[gen] = cb;
+  return function (method, params) {
+    var deferred = $.Deferred();
+    _callbacks[gen] = function (error, result) {
+      if (error)
+        deferred.reject(error);
+      else
+        deferred.resolve(result);
+    };
     var request = {
       method: method, 
       id: (gen++),
@@ -31,6 +37,7 @@ var query = (function () {
     script.src = "http://bugzilla.mozilla.org/jsonrpc.cgi?" + args.join("&");
     script.defer = true;
     document.head.appendChild(script);
+    return deferred;
   };
 })();
 
@@ -106,16 +113,16 @@ function all() {
 }
 
 // Search for bugs match the constraints in filter.
-function search(filter, cb) {
-  query("Bug.search", [filter], function (error, result) {
-    cb(error, result.bugs);
+function search(filter) {
+  return query("Bug.search", [filter]).then(function (result) {
+    return result.bugs;
   });
 }
 
 // Count the number of bugs matching the constraints in filter.
 function count(filter, cb) {
-  search(filter.limit(), function (error, bugs) {
-    cb(error, bugs.length);
+  search(filter.limit()).then(function (bugs) {
+    return bugs.length;
   });
 }
 
@@ -123,7 +130,7 @@ function count(filter, cb) {
 function group(filter, fields, cb) {
   if (typeof fields === "string")
     fields = [fields];
-  search(filter.limit(fields), function (error, bugs) {
+  return search(filter.limit(fields)).then(function (bugs) {
     var counts = {};
     $.each(bugs, function (_, bug) {
       var ptr = counts;
@@ -135,6 +142,6 @@ function group(filter, fields, cb) {
       });
       inc(ptr, bug[last]);
     });
-    cb(error, counts);
+    return counts;
   });
 }

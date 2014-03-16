@@ -92,15 +92,19 @@ function update() {
     html += "</a>";
     return html;
   }
+  function formatCounts(className, release, component, count) {
+    var html = formatCount(className, release, component, null, accumulate(count));
+    if ("nobody@mozilla.org" in count)
+      html += formatCount(className + ".unassigned", release, component, "nobody@mozilla.org", brace(accumulate(count["nobody@mozilla.org"])));
+    return html;
+  }
   function formatStatus(counts, component) {
     var html = "<ul id='status'>";
     eachAlphabetically(counts, function (release, count) {
       var canonical = release.replace("+", "").replace("?", "");
       html += "<li " + getReleaseColor(canonical) + ">";
       html += "<div class='release'>" + release + "</div>";
-      html += formatCount("count", release, component, null, accumulate(count));
-      if ("nobody@mozilla.org" in count)
-        html += formatCount("unassigned", release, component, "nobody@mozilla.org", brace(accumulate(count["nobody@mozilla.org"])));
+      html += formatCounts("count", release, component, count);
       html += "</li>";
     });
     html += "</ul>";

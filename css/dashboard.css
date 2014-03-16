@@ -33,6 +33,10 @@ a.count {
   font-size: 200%;
   font-weight: bold;
 }
+a.count.unassigned {
+  font-size: 100%;
+  font-weight: normal;
+}
 
 /* Colors for categories */
 #noms {

@@ -25,11 +25,13 @@ ul#components > li {
   padding: 20px 10px 20px 10px;
   text-align: center;
 }
+a {
+  color: white;
+  text-decoration: none;
+}
 a.count {
   font-size: 200%;
   font-weight: bold;
-  color: white;
-  text-decoration: none;
 }
 
 /* Colors for categories */

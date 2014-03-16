@@ -51,7 +51,7 @@ function update() {
   })();
 
   // Create a search query link for bugzilla we can redirect to.
-  function getLink(release, component) {
+  function getLink(release, component, assigned_to) {
     var url = "https://bugzilla.mozilla.org/buglist.cgi?";
     var args = [["bug_status", "UNCONFIRMED"],
                 ["bug_status", "NEW"],
@@ -61,10 +61,16 @@ function update() {
       args.push(["cf_blocking_b2g", release]);
     if (component)
       args.push(["component", component]);
+    if (assigned_to)
+      args.push(["assigned_to", assigned_to]);
     $.each(args, function (n, arg) {
         args[n] = encodeURIComponent(arg[0]) + "=" + encodeURIComponent(arg[1]);
       });
     return "href='" + url + args.join("&") + "'";
+  }
+
+  function formatCount(className, release, component, assigned_to, count) {
+    return "<a class='" + className + "' " + getLink(release, component, assigned_to) + ">" + count + "</a>";
   }
 
   function formatStatus(counts, component) {
@@ -73,7 +79,9 @@ function update() {
       var canonical = release.replace("+", "").replace("?", "");
       html += "<li " + getReleaseColor(canonical) + ">";
       html += "<div class='release'>" + release + "</div>";
-      html += "<a class='count' " + getLink(release, component) + ">" + accumulate(count) + "</a>";
+      html += formatCount("count", release, component, null, accumulate(count));
+      if ("nobody@mozilla.org" in count)
+        html += formatCount("unassigned", release, component, "nobody@mozilla.org", "(" + accumulate(count["nobody@mozilla.org"]) + ")");
       html += "</li>";
     });
     html += "</ul>";
@@ -92,7 +100,7 @@ function update() {
   }
 
   $.when(
-    group(all().blocking(suffix(releases, "?")).open(), ["cf_blocking_b2g"]).then(function (counts) {
+    group(all().blocking(suffix(releases, "?")).open(), ["cf_blocking_b2g", "assigned_to"]).then(function (counts) {
       $("li#noms").empty().append("<div>Nominations (" + accumulate(counts) + ")</div>").append(formatStatus(counts));
     }),
     group(all().blocking(suffix(releases, "+")).open(), ["component", "cf_blocking_b2g", "assigned_to"]).then(function (counts) {

@@ -6,6 +6,7 @@ var OWNERS = {
   // "BetaTriage": "?", // Firefox OS
   "Bluetooth": "Marco Chen", // Firefox OS
   "Build Config": "Dylan Oliver", // Core
+  "Canvas: 2D": "Milan Sreckovic",
   // "Emulator": "?", // Firefox OS
   // "FxA": "?", // Firefox OS
   "DOM: Core & HTML": "Andrew Overholt", // DOM
@@ -54,7 +55,9 @@ var OWNERS = {
   "Graphics": "Milan Sreckovic", // Core
   // "Hardware": "?", // Firefox OS
   "Hardware Abstraction Layer (HAL)": "Dave Hylands", // Core
+  "ImageLib": "Milan Sreckovic",
   "JavaScript Engine": "Naveed Ihsanullah", // Core
+  "Layers": "Milan Sreckovic",
   "Layout": "Jet Villegas", // Core
   "Networking": "Jason Duell", // Core
   "NFC": "Ken Chang", // Firefox OS

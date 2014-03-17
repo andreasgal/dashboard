@@ -57,7 +57,7 @@ var OWNERS = {
   // "Hardware": "?", // Firefox OS
   "Hardware Abstraction Layer (HAL)": "Dave Hylands", // Core
   "ImageLib": "Milan Sreckovic",
-  "IPC": "Andrew Overholt',
+  "IPC": "Andrew Overholt",
   "JavaScript Engine": "Naveed Ihsanullah", // Core
   "Layout": "Jet Villegas", // Core
   "Networking": "Jason Duell", // Core

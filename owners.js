@@ -3,11 +3,11 @@
 
 var OWNERS = {
   "AudioChannel": "Marco Chen", // Firefox OS
-  "BetaTriage": "?", // Firefox OS
+  // "BetaTriage": "?", // Firefox OS
   "Bluetooth": "Marco Chen", // Firefox OS
   "Build Config": "Dylan Oliver", // Core
-  "Emulator": "?", // Firefox OS
-  "FxA": "?", // Firefox OS
+  // "Emulator": "?", // Firefox OS
+  // "FxA": "?", // Firefox OS
   "DOM: Core & HTML": "Andrew Overholt", // DOM
   "DOM": "Andrew Overholt", // DOM
   "DOM: Contacts": "David Scravaglieri", // DOM
@@ -26,13 +26,13 @@ var OWNERS = {
   "Gaia::First Time Experience": "Gregor Wagner",
   "Gaia::FMRadio": "Hema Koka",
   "Gaia::Gallery": "Hema Koka",
-  "Gaia::GithubBot": "?",
+  // "Gaia::GithubBot": "?",
   "Gaia::Homescreen": "Gregor Wagner",
   "Gaia::Keyboard": "Tim Chien",
   "Gaia::Music": "Hema Koka",
-  "Gaia::Notes": "?",
-  "Gaia::PDF Viewer": "?",
-  "Gaia::PerformanceTest": "?",
+  // "Gaia::Notes": "?",
+  // "Gaia::PDF Viewer": "?",
+  // "Gaia::PerformanceTest": "?",
   "Gaia::Ringtones": "Hema Koka",
   "Gaia::Search": "Gregor Wagner",
   "Gaia::Settings": "Tim Chien",
@@ -42,17 +42,17 @@ var OWNERS = {
   "Gaia::System::Input Mgmt": "Tim Chien",
   "Gaia::System::Lockscreen": "Tim Chien",
   "Gaia::System::Window Mgmt": "Tim Chien",
-  "Gaia::TestAgent": "?",
-  "Gaia::UI Tests": "?",
+  // "Gaia::TestAgent": "?",
+  // "Gaia::UI Tests": "?",
   "Gaia::Video": "Hema Koka",
-  "Gaia::Wallpaper": "?",
-  "Gaia::Wappush": "?",
-  "General": "?", // Firefox OS
-  "GonkIntegration": "?", // Firefox OS
+  // "Gaia::Wallpaper": "?",
+  // "Gaia::Wappush": "?",
+  // "General": "?", // Firefox OS
+  // "GonkIntegration": "?", // Firefox OS
   "General Automation": "Jonathan Griffin", // Release Engineering
   "Geolocation": "Doug Turner", // Core
   "Graphics": "Milan Sreckovic", // Core
-  "Hardware": "?", // Firefox OS
+  // "Hardware": "?", // Firefox OS
   "Hardware Abstraction Layer (HAL)": "Dave Hylands", // Core
   "JavaScript Engine": "Naveed Ihsanullah", // Core
   "Layout": "Jet Villegas", // Core
@@ -61,10 +61,10 @@ var OWNERS = {
   "Panning and Zooming": "Milan Sreckovic", // Core
   "Performance": "Mike Lee", // Firefox OS
   "Runtime": "Gregor Wagner", // Firefox OS
-  "Simulator": "?", // Firefox OS
+  // "Simulator": "?", // Firefox OS
   "RIL": "Ken Chang", // Firefox OS
   "Video/Audio": "Jet Villegas", // Core
-  "Vendcom": "?", // Firefox OS
+  // "Vendcom": "?", // Firefox OS
   "Wifi": "Ken Chang", // Firefox OS
-  "WMF": "?" // Firefox OS
+  // "WMF": "?" // Firefox OS
 };

@@ -45,6 +45,10 @@ a.count.unassigned {
   font-size: 100%;
   font-weight: normal;
 }
+.componentowner {
+  font-size: 75%;
+  font-style: italic;
+}
 
 /* Colors for categories */
 #noms {

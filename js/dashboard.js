@@ -181,7 +181,7 @@ function refresh() {
     var showOwners = $("div#toggleOwners").hasClass("checked");
     eachAlphabetically(components, function (component, counts) {
       var label = (showOwners && (component in OWNERS))
-                  ? OWNERS[component]
+                  ? component + "<p class='componentowner'>" + OWNERS[component] + "</p>"
                   : component;
       html += "<li>";
       html += "<div class='component'>" + label + "</div>";

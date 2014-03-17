@@ -29,7 +29,8 @@ parseQueryString(function (name, value, integer, bool, list) {
     config.flag = value;
     break;
   case "nomenu":
-    $("div#menu").replaceWith("<div id='title'>" + value + "</div>");
+    $("div#menu").hide();
+    $("div#title").text(value);
     break;
   }
 });

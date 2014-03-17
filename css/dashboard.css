@@ -29,7 +29,7 @@ ul#status > li {
 }
 ul#components > li {
   display: inline-block;
-  padding: 20px 10px 20px 10px;
+  padding: 10px 10px 20px 10px;
   text-align: center;
 }
 a {

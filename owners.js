@@ -64,6 +64,7 @@ var OWNERS = {
   // "Simulator": "?", // Firefox OS
   "RIL": "Ken Chang", // Firefox OS
   "Video/Audio": "Jet Villegas", // Core
+  "Video/Audio: Recording": "CJ Ku", // Core
   // "Vendcom": "?", // Firefox OS
   "Wifi": "Ken Chang", // Firefox OS
   // "WMF": "?" // Firefox OS

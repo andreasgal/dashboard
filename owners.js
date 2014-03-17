@@ -44,5 +44,6 @@ var OWNERS = {
   "RIL": "Ken Chang",
   "Graphics": "Milan Sreckovic",
   "Video/Audio": "Jet Villegas",
+  "Video/Audio: Recording": "CJ Ku",
   "Wifi": "Ken Chang"
 };

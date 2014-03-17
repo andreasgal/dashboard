@@ -53,11 +53,11 @@ var OWNERS = {
   "General Automation": "Jonathan Griffin", // Release Engineering
   "Geolocation": "Doug Turner", // Core
   "Graphics": "Milan Sreckovic", // Core
+  "Graphics: Layers": "Milan Sreckovic", // Core
   // "Hardware": "?", // Firefox OS
   "Hardware Abstraction Layer (HAL)": "Dave Hylands", // Core
   "ImageLib": "Milan Sreckovic",
   "JavaScript Engine": "Naveed Ihsanullah", // Core
-  "Layers": "Milan Sreckovic",
   "Layout": "Jet Villegas", // Core
   "Networking": "Jason Duell", // Core
   "NFC": "Ken Chang", // Firefox OS

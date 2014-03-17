@@ -1,11 +1,14 @@
 /* -*- Mode: Java; tab-width: 2; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
 /* vim: set shiftwidth=2 tabstop=2 autoindent cindent expandtab: */
 
+"use strict";
+
 var config = {
   releases: ["1.3", "1.3T", "1.4"], // which releases to show
   flag: "cf_blocking_b2g", // name of the release flag to use
   reload: 0, // reload every this many seconds (0 means disabled)
-  maxAge: 7 // maximum age in days (deep red when showing activity)
+  maxAge: 7, // maximum age in days (deep red when showing activity)
+  components: null // don't filter any specific components
 };
 
 // Parse the url and extract configuration information.
@@ -13,6 +16,12 @@ parseQueryString(function (name, value, integer, bool, list) {
   switch (name) {
   case "releases":
     config.releases = list;
+    break;
+  case "components":
+    config.components = {};
+    $.each(list, function (_, component) {
+      config.components[component] = true;
+    });
     break;
   case "reload":
     config.reload = integer;
@@ -210,6 +219,13 @@ function update() {
     group(all().blocking(config.blocking_value).open(), ["component", config.flag, "assigned_to", "last_change_time"]).then(function (counts) {
       data.untriaged = ("General" in counts) ? counts.General : null;
       data.blocking = without(counts, "General");
+      // filter for specific components if requested
+      if (config.components) {
+        $.each(data.blocking, function (component) {
+          if (!(component in config.components))
+            delete data.blocking[component];
+        });
+      }
     })
   ).then(function() {
     refresh();

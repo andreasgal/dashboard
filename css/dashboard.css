@@ -10,6 +10,7 @@ ul {
 }
 body > ul {
   padding: 0;
+  width: 100%;
 }
 body > ul > li > div {
   padding: 10px 10px 10px 10px;

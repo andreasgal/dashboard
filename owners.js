@@ -47,7 +47,7 @@ var OWNERS = {
   // "Gaia::UI Tests": "?",
   "Gaia::Video": "Hema Koka",
   // "Gaia::Wallpaper": "?",
-  // "Gaia::Wappush": "?",
+  "Gaia::Wappush": "David Scravaglieri",
   // "General": "?", // Firefox OS
   "GonkIntegration": "Thomas Tsai", // Firefox OS
   "General Automation": "Jonathan Griffin", // Release Engineering

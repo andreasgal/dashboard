@@ -34,7 +34,7 @@ var query = (function () {
       });
       var script = document.createElement('script');
       script.type = "text/javascript";
-      script.src = "http://bugzilla.mozilla.org/jsonrpc.cgi?" + args.join("&");
+      script.src = "https://bugzilla.mozilla.org/jsonrpc.cgi?" + args.join("&");
       script.defer = true;
       document.head.appendChild(script);
     });

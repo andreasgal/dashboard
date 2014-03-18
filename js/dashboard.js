@@ -208,7 +208,7 @@ function refresh() {
 function update() {
   function without(obj, field) {
     obj = $.extend(true, {}, obj);
-    delete obj.field;
+    delete obj[field];
     return obj;
   }
 

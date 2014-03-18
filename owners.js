@@ -27,7 +27,7 @@ var OWNERS = {
   "Gaia::First Time Experience": "Gregor Wagner",
   "Gaia::FMRadio": "Hema Koka",
   "Gaia::Gallery": "Hema Koka",
-  // "Gaia::GithubBot": "?",
+  // "Gaia::GithubBot": "?",ven
   "Gaia::Homescreen": "Gregor Wagner",
   "Gaia::Keyboard": "Tim Chien",
   "Gaia::Music": "Hema Koka",
@@ -49,7 +49,7 @@ var OWNERS = {
   // "Gaia::Wallpaper": "?",
   // "Gaia::Wappush": "?",
   // "General": "?", // Firefox OS
-  // "GonkIntegration": "?", // Firefox OS
+  "GonkIntegration": "Thomas Tsai", // Firefox OS
   "General Automation": "Jonathan Griffin", // Release Engineering
   "Geolocation": "Doug Turner", // Core
   "Graphics": "Milan Sreckovic", // Core

@@ -31,7 +31,7 @@ var OWNERS = {
   "Gaia::Homescreen": "Gregor Wagner",
   "Gaia::Keyboard": "Tim Chien",
   "Gaia::Music": "Hema Koka",
-  // "Gaia::Notes": "?",
+  "Gaia::Notes": "Dylan Oliver",
   // "Gaia::PDF Viewer": "?",
   // "Gaia::PerformanceTest": "?",
   "Gaia::Ringtones": "Hema Koka",

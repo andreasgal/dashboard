@@ -2,9 +2,9 @@
 /* vim: set shiftwidth=2 tabstop=2 autoindent cindent expandtab: */
 
 var OWNERS = {
-  "AudioChannel": "Marco Chen", // Firefox OS
+  "AudioChannel": "Eric Chou", // Firefox OS
   // "BetaTriage": "?", // Firefox OS
-  "Bluetooth": "Marco Chen", // Firefox OS
+  "Bluetooth": "Eric Chou", // Firefox OS
   "Build Config": "Dylan Oliver", // Core
   "Canvas: 2D": "Milan Sreckovic",
   // "Emulator": "?", // Firefox OS

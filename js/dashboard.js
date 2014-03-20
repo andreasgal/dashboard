@@ -4,7 +4,7 @@
 "use strict";
 
 var config = {
-  releases: ["1.3", "1.3T", "1.4"], // which releases to show
+  releases: ["1.3", "1.3T", "1.4", "1.5"], // which releases to show
   flag: "cf_blocking_b2g", // name of the release flag to use
   reload: 0, // reload every this many seconds (0 means disabled)
   maxAge: 7, // maximum age in days (deep red when showing activity)

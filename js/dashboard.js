@@ -8,7 +8,8 @@ var config = {
   flag: "cf_blocking_b2g", // name of the release flag to use
   reload: 0, // reload every this many seconds (0 means disabled)
   maxAge: 7, // maximum age in days (deep red when showing activity)
-  components: null // don't filter any specific components
+  components: null, // don't filter any specific components
+  owner: null // don't filter by owner
 };
 
 // Parse the url and extract configuration information.
@@ -16,6 +17,9 @@ parseQueryString(function (name, value, integer, bool, list) {
   switch (name) {
   case "releases":
     config.releases = list;
+    break;
+  case "owner":
+    config.owner = value;
     break;
   case "components":
     config.components = {};
@@ -224,6 +228,14 @@ function update() {
         $.each(data.blocking, function (component) {
           if (!(component in config.components))
             delete data.blocking[component];
+        });
+      }
+      if (config.owner) {
+        var querystring_owner = config.owner.toLowerCase();
+        $.each(data.blocking, function (component) {
+          if (!OWNERS[component] || OWNERS[component].toLowerCase().indexOf(querystring_owner) === -1) {
+            delete data.blocking[component];
+          }
         });
       }
     })

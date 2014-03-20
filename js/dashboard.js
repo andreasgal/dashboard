@@ -154,21 +154,26 @@ function refresh() {
     var showActivity = $("div#toggleActivity").hasClass("checked");
     eachAlphabetically(counts, function (release, count) {
       var color;
-      if (showActivity) {
-        // Determine the oldest activity.
-        var oldest = Date.now();
-        $.each(count, function (assigned_to, dates) {
-          $.each(dates, function (date) {
-            oldest = Math.min(new Date(date).getTime(), oldest);
-          });
+      var secondaryColor;
+      // Determine the oldest activity.
+      var oldest = Date.now();
+      $.each(count, function (assigned_to, dates) {
+        $.each(dates, function (date) {
+          oldest = Math.min(new Date(date).getTime(), oldest);
         });
-        // Calculate the age in days and cap to 7 days.
-        var age = Math.min(config.maxAge, (Date.now() - oldest) / 1000 / 60 / 60 / 24);
+      });
+      // Calculate the age in days and cap to 7 days.
+      var age = Math.min(config.maxAge, (Date.now() - oldest) / 1000 / 60 / 60 / 24);
+
+      if (showActivity) {
         color = getStatusColor(1 - age / config.maxAge);
+        secondaryColor = getReleaseColor(release.replace("+", "").replace("?", ""));
       } else {
         color = getReleaseColor(release.replace("+", "").replace("?", ""));
+        secondaryColor = getStatusColor(1 - age / config.maxAge);
       }
       html += "<li " + color + ">";
+      html += "<span " + secondaryColor + "></span>";
       html += "<div class='release'>" + release + "</div>";
       html += formatCounts("count", release, component, count);
       html += "</li>";

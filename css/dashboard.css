@@ -24,9 +24,17 @@ div#title {
 }
 ul#status > li {
   display: inline-block;
-  padding: 10px 10px 10px 10px;
+  padding: 10px 10px 20px 10px;
   text-align: center;
   font-weight: normal;
+  position: relative;
+}
+ul#status > li > span {
+  position: absolute;
+  display: block;
+  bottom: 0; left: 0;
+  height: 10px;
+  width: 100%;
 }
 ul#components > li {
   display: inline-block;

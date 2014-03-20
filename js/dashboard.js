@@ -64,12 +64,13 @@ $("div#toggleOwners, div#toggleActivity").click(function () {
   refresh();
 });
 
+$("div#help").hide();
+
 $("div#toggleHelp").click(function () {
   var checkbox = $(this);
   checkbox.toggleClass("checked");
   $("div#help").toggle(400);
 });
-$("div#help").hide();
 
 function refresh() {
   // Assign a unique color and return it as a class declaration

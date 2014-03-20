@@ -16,6 +16,7 @@ var OWNERS = {
   "Gaia": "Vivien Nicolas",
   "Gaia::Bluetooth File Transfer": "Tim Chien",
   "Gaia::Browser": "Gregor Wagner",
+  "Gaia::Build": "Tim Chien",
   "Gaia::Calendar": "Dylan Oliver",
   "Gaia::Camera": "Hema Koka",
   "Gaia::Clock": "Dylan Oliver",

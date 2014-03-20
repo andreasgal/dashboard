@@ -2,9 +2,9 @@
 /* vim: set shiftwidth=2 tabstop=2 autoindent cindent expandtab: */
 
 var OWNERS = {
-  "AudioChannel": "Marco Chen", // Firefox OS
+  "AudioChannel": "Eric Chou", // Firefox OS
   // "BetaTriage": "?", // Firefox OS
-  "Bluetooth": "Marco Chen", // Firefox OS
+  "Bluetooth": "Eric Chou", // Firefox OS
   "Build Config": "Dylan Oliver", // Core
   "Canvas: 2D": "Milan Sreckovic",
   // "Emulator": "?", // Firefox OS
@@ -13,9 +13,10 @@ var OWNERS = {
   "DOM": "Andrew Overholt", // DOM
   "DOM: Contacts": "David Scravaglieri", // DOM
   "DOM: Device Interfaces": "Andrew Overholt", // DOM
-  "Gaia": "Vivien Nicolas",
+  "Gaia": "Dylan Oliver",
   "Gaia::Bluetooth File Transfer": "Tim Chien",
   "Gaia::Browser": "Gregor Wagner",
+  "Gaia::Build": "Tim Chien",
   "Gaia::Calendar": "Dylan Oliver",
   "Gaia::Camera": "Hema Koka",
   "Gaia::Clock": "Dylan Oliver",
@@ -27,11 +28,11 @@ var OWNERS = {
   "Gaia::First Time Experience": "Gregor Wagner",
   "Gaia::FMRadio": "Hema Koka",
   "Gaia::Gallery": "Hema Koka",
-  // "Gaia::GithubBot": "?",
+  // "Gaia::GithubBot": "?",ven
   "Gaia::Homescreen": "Gregor Wagner",
   "Gaia::Keyboard": "Tim Chien",
   "Gaia::Music": "Hema Koka",
-  // "Gaia::Notes": "?",
+  "Gaia::Notes": "Dylan Oliver",
   // "Gaia::PDF Viewer": "?",
   // "Gaia::PerformanceTest": "?",
   "Gaia::Ringtones": "Hema Koka",
@@ -47,9 +48,9 @@ var OWNERS = {
   // "Gaia::UI Tests": "?",
   "Gaia::Video": "Hema Koka",
   // "Gaia::Wallpaper": "?",
-  // "Gaia::Wappush": "?",
+  "Gaia::Wappush": "David Scravaglieri",
   // "General": "?", // Firefox OS
-  // "GonkIntegration": "?", // Firefox OS
+  "GonkIntegration": "Thomas Tsai", // Firefox OS
   "General Automation": "Jonathan Griffin", // Release Engineering
   "Geolocation": "Doug Turner", // Core
   "Graphics": "Milan Sreckovic", // Core

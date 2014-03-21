@@ -70,7 +70,7 @@ var OWNERS = {
   "NFC": "Ken Chang", // Firefox OS
   "Panning and Zooming": "Milan Sreckovic", // Core
   "Performance": "Mike Lee", // Firefox OS
-  "Runtime": "Gregor Wagner\n(2nd: Fabrice Desré)", // Firefox OS
+  "Runtime": "Gregor Wagner (2nd: Fabrice Desré)", // Firefox OS
   // "Simulator": "?", // Firefox OS
   "RIL": "Ken Chang", // Firefox OS
   "Video/Audio": "Jet Villegas", // Core

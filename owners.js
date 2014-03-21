@@ -64,6 +64,7 @@ var OWNERS = {
   "ImageLib": "Milan Sreckovic",
   "IPC": "Andrew Overholt",
   "JavaScript Engine": "Naveed Ihsanullah", // Core
+  "JavaScript: GC": "Naveed Ihsanullah", // Core
   "Layout": "Jet Villegas", // Core
   "MFBT": "Naveed Ihsanullah",
   "Networking": "Jason Duell", // Core

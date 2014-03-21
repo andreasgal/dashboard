@@ -11,6 +11,7 @@ var OWNERS = {
   "CSS Parsing and Computation": "Jet Villegas",
   // "Emulator": "?", // Firefox OS
   // "FxA": "?", // Firefox OS
+  "DOM: Apps": "Fabrice Desré",
   "DOM: Core & HTML": "Andrew Overholt", // DOM
   "DOM": "Andrew Overholt", // DOM
   "DOM: Contacts": "David Scravaglieri", // DOM

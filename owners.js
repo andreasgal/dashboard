@@ -15,7 +15,7 @@ var OWNERS = {
   "DOM": "Andrew Overholt", // DOM
   "DOM: Contacts": "David Scravaglieri", // DOM
   "DOM: Device Interfaces": "Andrew Overholt", // DOM
-  "DOM: Events", "Andrew Overholt",
+  "DOM: Events": "Andrew Overholt",
   "Gaia": "Dylan Oliver",
   "Gaia::Bluetooth File Transfer": "Tim Chien",
   "Gaia::Browser": "Gregor Wagner",

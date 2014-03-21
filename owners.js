@@ -7,12 +7,15 @@ var OWNERS = {
   "Bluetooth": "Eric Chou", // Firefox OS
   "Build Config": "Dylan Oliver", // Core
   "Canvas: 2D": "Milan Sreckovic",
+  "Canvas: WebGL": "Milan Sreckovic",
+  "CSS Parsing and Computation": "Jet Villegas",
   // "Emulator": "?", // Firefox OS
   // "FxA": "?", // Firefox OS
   "DOM: Core & HTML": "Andrew Overholt", // DOM
   "DOM": "Andrew Overholt", // DOM
   "DOM: Contacts": "David Scravaglieri", // DOM
   "DOM: Device Interfaces": "Andrew Overholt", // DOM
+  "DOM: Events", "Andrew Overholt",
   "Gaia": "Dylan Oliver",
   "Gaia::Bluetooth File Transfer": "Tim Chien",
   "Gaia::Browser": "Gregor Wagner",
@@ -61,6 +64,7 @@ var OWNERS = {
   "IPC": "Andrew Overholt",
   "JavaScript Engine": "Naveed Ihsanullah", // Core
   "Layout": "Jet Villegas", // Core
+  "MFBT": "Naveed Ihsanullah",
   "Networking": "Jason Duell", // Core
   "NFC": "Ken Chang", // Firefox OS
   "Panning and Zooming": "Milan Sreckovic", // Core

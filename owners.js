@@ -12,11 +12,11 @@ var OWNERS = {
   // "Emulator": "?", // Firefox OS
   // "FxA": "?", // Firefox OS
   "DOM: Apps": "Fabrice Desré",
-  "DOM: Core & HTML": "Andrew Overholt", // DOM
-  "DOM": "Andrew Overholt", // DOM
+  "DOM: Core & HTML": "Andrew Overholt (2nd: Johnny Stenback)", // DOM
+  "DOM": "Andrew Overholt (2nd: Johnny Stenback)", // DOM
   "DOM: Contacts": "David Scravaglieri", // DOM
-  "DOM: Device Interfaces": "Andrew Overholt", // DOM
-  "DOM: Events": "Andrew Overholt",
+  "DOM: Device Interfaces": "Andrew Overholt (2nd: Johnny Stenback)", // DOM
+  "DOM: Events": "Andrew Overholt (2nd: Johnny Stenback)",
   "Gaia": "Dylan Oliver (2nd: Gregor Wagner)",
   "Gaia::Bluetooth File Transfer": "Tim Chien",
   "Gaia::Browser": "Gregor Wagner (2nd: Ben Francis)",
@@ -62,7 +62,7 @@ var OWNERS = {
   // "Hardware": "?", // Firefox OS
   "Hardware Abstraction Layer (HAL)": "Dave Hylands", // Core
   "ImageLib": "Milan Sreckovic",
-  "IPC": "Andrew Overholt",
+  "IPC": "Andrew Overholt (2nd: Johnny Stenback)",
   "JavaScript Engine": "Naveed Ihsanullah", // Core
   "JavaScript: GC": "Naveed Ihsanullah", // Core
   "Layout": "Jet Villegas", // Core

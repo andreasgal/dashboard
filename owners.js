@@ -1,6 +1,8 @@
 /* -*- Mode: Java; tab-width: 2; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
 /* vim: set shiftwidth=2 tabstop=2 autoindent cindent expandtab: */
 
+//Please keep the owner names consistent with phonebook names
+
 var OWNERS = {
   "AudioChannel": "Eric Chou", // Firefox OS
   // "BetaTriage": "?", // Firefox OS
@@ -18,9 +20,9 @@ var OWNERS = {
   "DOM: Device Interfaces": "Andrew Overholt (2nd: Johnny Stenback)", // DOM
   "DOM: Events": "Andrew Overholt (2nd: Johnny Stenback)",
   "Gaia": "Dylan Oliver (2nd: Gregor Wagner)",
-  "Gaia::Bluetooth File Transfer": "Tim Chien",
+  "Gaia::Bluetooth File Transfer": "Tim Guan-tin Chien",
   "Gaia::Browser": "Gregor Wagner (2nd: Ben Francis)",
-  "Gaia::Build": "Tim Chien",
+  "Gaia::Build": "Tim Guan-tin Chien",
   "Gaia::Calendar": "Dylan Oliver",
   "Gaia::Camera": "Hema Koka",
   "Gaia::Clock": "Dylan Oliver",
@@ -34,20 +36,20 @@ var OWNERS = {
   "Gaia::Gallery": "Hema Koka",
   // "Gaia::GithubBot": "?",ven
   "Gaia::Homescreen": "Gregor Wagner (2nd: Kevin Grandon)",
-  "Gaia::Keyboard": "Tim Chien",
+  "Gaia::Keyboard": "Tim Guan-tin Chien",
   "Gaia::Music": "Hema Koka",
   "Gaia::Notes": "Dylan Oliver",
   // "Gaia::PDF Viewer": "?",
   // "Gaia::PerformanceTest": "?",
   "Gaia::Ringtones": "Hema Koka",
   "Gaia::Search": "Gregor Wagner (2nd: Kevin Grandon)",
-  "Gaia::Settings": "Tim Chien",
+  "Gaia::Settings": "Tim Guan-tin Chien",
   "Gaia::SMS": "David Scravaglieri",
   "Gaia::System": "Gregor Wagner (2nd: Michael Henretty)", //  Tim relies on Gregor to actively throwing bugs over.
   "Gaia::System::Browser Chrome": "Gregor Wagner (2nd Ben Francis)",
-  "Gaia::System::Input Mgmt": "Tim Chien",
-  "Gaia::System::Lockscreen": "Tim Chien",
-  "Gaia::System::Window Mgmt": "Tim Chien",
+  "Gaia::System::Input Mgmt": "Tim Guan-tin Chien",
+  "Gaia::System::Lockscreen": "Tim Guan-tin Chien",
+  "Gaia::System::Window Mgmt": "Tim Guan-tin Chien",
   // "Gaia::TestAgent": "?",
   // "Gaia::UI Tests": "?",
   "Gaia::Video": "Hema Koka",

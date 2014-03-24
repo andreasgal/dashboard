@@ -76,7 +76,7 @@ var OWNERS = {
   "RIL": "Ken Chang", // Firefox OS
   "Video/Audio": "Jet Villegas", // Core
   "Video/Audio: Recording": "CJ Ku", // Core
-  // "Vendcom": "?", // Firefox OS
+  "Vendcom": "Steven Yang", // Firefox OS
   "Wifi": "Ken Chang", // Firefox OS
   // "WMF": "?" // Firefox OS
 };

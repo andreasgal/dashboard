@@ -8,8 +8,8 @@ var OWNERS = {
   // "BetaTriage": "?", // Firefox OS
   "Bluetooth": "Eric Chou", // Firefox OS
   "Build Config": "Dylan Oliver", // Core
-  "Canvas: 2D": "Milan Sreckovic",
-  "Canvas: WebGL": "Milan Sreckovic",
+  "Canvas: 2D": "Milan Sreckovic (Benoit Jacob, Jeff Muizelaar)",
+  "Canvas: WebGL": "Milan Sreckovic (Benoit Jacob, Jeff Gilbert)",
   "CSS Parsing and Computation": "Jet Villegas",
   // "Emulator": "?", // Firefox OS
   // "FxA": "?", // Firefox OS
@@ -59,11 +59,11 @@ var OWNERS = {
   "GonkIntegration": "Thomas Tsai", // Firefox OS
   "General Automation": "Jonathan Griffin", // Release Engineering
   "Geolocation": "Doug Turner", // Core
-  "Graphics": "Milan Sreckovic", // Core
-  "Graphics: Layers": "Milan Sreckovic", // Core
+  "Graphics": "Milan Sreckovic (Jeff Muizelaar, Benoit Girard)", // Core
+  "Graphics: Layers": "Milan Sreckovic (Bas Schouten, Benoit Girard)", // Core
   // "Hardware": "?", // Firefox OS
   "Hardware Abstraction Layer (HAL)": "Dave Hylands", // Core
-  "ImageLib": "Milan Sreckovic",
+  "ImageLib": "Milan Sreckovic (Jeff Muizelaar, Seth Fowler)",
   "IPC": "Andrew Overholt (2nd: Johnny Stenback)",
   "JavaScript Engine": "Naveed Ihsanullah", // Core
   "JavaScript: GC": "Naveed Ihsanullah", // Core
@@ -71,7 +71,7 @@ var OWNERS = {
   "MFBT": "Naveed Ihsanullah",
   "Networking": "Jason Duell", // Core
   "NFC": "Ken Chang", // Firefox OS
-  "Panning and Zooming": "Milan Sreckovic", // Core
+  "Panning and Zooming": "Milan Sreckovic (Kartikaya Gupta, Botond Ballo)", // Core
   "Performance": "Mike Lee", // Firefox OS
   "Runtime": "Gregor Wagner (2nd: Fabrice Desré)", // Firefox OS
   // "Simulator": "?", // Firefox OS

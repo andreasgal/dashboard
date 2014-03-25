@@ -19,17 +19,17 @@ var OWNERS = {
   "DOM: Contacts": "David Scravaglieri (Anthony Ricaud)", // DOM
   "DOM: Device Interfaces": "Andrew Overholt (Johnny Stenback)", // DOM
   "DOM: Events": "Andrew Overholt (Johnny Stenback)",
-  "Gaia": "David Scravaglieri (Anthony Ricaud)",
+  "Gaia": "Dylan Oliver (Gregor Wagner)",
   "Gaia::Bluetooth File Transfer": "Tim Guan-tin Chien",
   "Gaia::Browser": "Gregor Wagner (Ben Francis)",
   "Gaia::Build": "Tim Guan-tin Chien",
-  "Gaia::Calendar": "Dylan Oliver (Gareth Aye)",
+  "Gaia::Calendar": "Dylan Oliver",
   "Gaia::Camera": "Hema Koka (David Flanagan)",
-  "Gaia::Clock": "Dylan Oliver (Marcus Cavanaugh)",
+  "Gaia::Clock": "Dylan Oliver",
   "Gaia::Contacts": "David Scravaglieri (Anthony Ricaud)",
   "Gaia::Cost Control": "David Scravaglieri (Anthony Ricaud)",
   "Gaia::Dialer": "David Scravaglieri (Anthony Ricaud)",
-  "Gaia::E-Mail": "Dylan Oliver (Andrew Sutherland)",
+  "Gaia::E-Mail": "Dylan Oliver",
   "Gaia::Everything.me": "Gregor Wagner (Michael Henretty)",
   "Gaia::First Time Experience": "Gregor Wagner (Michael Henretty)",
   "Gaia::FMRadio": "Hema Koka (David Flanagan)",
@@ -72,7 +72,7 @@ var OWNERS = {
   "Networking": "Jason Duell", // Core
   "NFC": "Ken Chang", // Firefox OS
   "Panning and Zooming": "Milan Sreckovic (Kartikaya Gupta, Botond Ballo)", // Core
-  "Performance": "Mike Lee", // Firefox OS
+  "Performance": "Mike Lee (Ben Kelly, Mason Chang)", // Firefox OS
   "Runtime": "Gregor Wagner (Fabrice Desré)", // Firefox OS
   // "Simulator": "?", // Firefox OS
   "RIL": "Ken Chang", // Firefox OS

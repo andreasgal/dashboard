@@ -79,6 +79,7 @@ var OWNERS = {
   "Video/Audio": "Jet Villegas", // Core
   "Video/Audio: Recording": "CJ Ku", // Core
   "Vendcom": "Steven Yang", // Firefox OS
+  "Widget: Gonk": "Mike Wu",
   "Wifi": "Ken Chang", // Firefox OS
   // "WMF": "?" // Firefox OS
 };

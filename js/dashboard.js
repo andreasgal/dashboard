@@ -54,7 +54,8 @@ config.blocking_value = suffix(config.releases, "+");
 var data = {
   nominations: [],
   untriaged: [],
-  blocking: []
+  blocking: [], 
+  blockers: []
 };
 
 // Initially hide the body and fade it in when we get some data to show.
@@ -205,7 +206,7 @@ function refresh() {
   }
   $("li#blockers").empty().append("<div>Blockers: " +
                                   formatCounts(null, config.blocking_value, null, data.blocking) +
-                                  "</div>").append(formatComponents(data.blocking));
+                                  "</div>").append(formatStatus(data.blockers)).append(formatComponents(data.blocking));
 }
 
 function update() {
@@ -218,6 +219,9 @@ function update() {
   $.when(
     group(all().blocking(config.nomination_value).open(), [config.flag, "assigned_to", "last_change_time"]).then(function (counts) {
       data.nominations = counts;
+    }),
+    group(all().blocking(config.blocking_value).open(), [config.flag, "assigned_to", "last_change_time"]).then(function (counts) {
+      data.blockers = counts;
     }),
     group(all().blocking(config.blocking_value).open(), ["component", config.flag, "assigned_to", "last_change_time"]).then(function (counts) {
       data.untriaged = ("General" in counts) ? counts.General : null;

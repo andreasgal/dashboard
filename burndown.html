@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <title>
+      Release Dashboard
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" href="css/base.css" rel="stylesheet">
+    <link type="text/css" href="css/menu.css" rel="stylesheet">
+    <link type="text/css" href="css/colors.css" rel="stylesheet">
+    <link type="text/css" href="css/dashboard.css" rel="stylesheet">
+    <link type="text/css" href="css/jquery.jqplot.min.css" rel="stylesheet"/>
+    <script type="text/javascript" src="owners.js" defer></script>
+    <script type="text/javascript" src="js/jquery-2.1.0.min.js" defer></script>
+    <script type="text/javascript" src="js/bugzilla.js" defer></script>
+    <script type="text/javascript" src="js/jquery.jqplot.min.js" defer></script>
+    <script type="text/javascript" src="js/jqplot.barRenderer.min.js" defer></script>
+    <script type="text/javascript" src="js/querystring.js" defer></script>
+    <script type="text/javascript" src="js/burndown.js" defer></script>
+  </head>
+
+  <body>
+     <div id="header">
+     <h3>Burndown Chart Generator</h3>
+     <form id="make_chart">
+     Bug: <input type="text" id="bug_id">
+     <br>
+     <div id="bug_name"></div>
+     <div id="remaining"></div>
+     <div id="stats"></div>
+     <input type="submit" value="Go">
+     </form>
+     </div>
+     <div id="burndown" style="height:400px;width:600px; "></div>
+  </body>
+</html>

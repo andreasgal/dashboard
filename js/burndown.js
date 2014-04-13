@@ -12,7 +12,8 @@ function create_data() {
         all_bugs : {},
         suppressed_bugs : [],
         todo_bugs : [],
-        outstanding_reqs : 0,
+        outstanding_bugs : 0,
+        total_bugs : 0,
 
         // Computed stats.
         added : {},
@@ -31,6 +32,8 @@ function retrieve_bug(bug_id) {
     
     var q = query("Bug.get", [{ids:[bug_id]}]);
     
+    data.outstanding_bugs++;
+    data.total_bugs++;
     q.then(function (more) {
         more.bugs.forEach(function(bug) {
             data.all_bugs[bug.id] = bug;
@@ -49,35 +52,37 @@ function retrieve_bug(bug_id) {
 }
 
 function get_more_dependencies(d) {
-    retrieve_bug(data.todo_bugs.pop()).then(function(dependencies) {
-        dependencies.forEach(function(dep) {
-            if (data.all_bugs[dep])
-                return;  // Already retrieved.
-
-            if (data.todo_bugs.indexOf(dep) !== -1)
-                return;  // Already on TODO list.
-
-            if (data.suppressed_bugs.indexOf(dep) != -1)
-                return;  // Suppressed
-
-            data.todo_bugs = data.todo_bugs.concat(dep);
-        });
+    data.todo_bugs.forEach(function(bug) {
+        retrieve_bug(bug).then(function(dependencies) {
+            data.outstanding_bugs--;
+            dependencies.forEach(function(dep) {
+                if (data.all_bugs[dep])
+                    return;  // Already retrieved.
+                
+                if (data.todo_bugs.indexOf(dep) !== -1)
+                    return;  // Already on TODO list.
+                
+                if (data.suppressed_bugs.indexOf(dep) != -1)
+                    return;  // Suppressed
+                
+                data.todo_bugs = data.todo_bugs.concat(dep);
+            });
         
-        if (data.todo_bugs.length === 0) {
-            console.log("Got all bugs");
-            $("#remaining").empty();
-            d.resolve(data.all_bugs);
-        }
-        else {
-            console.log("Still more bugs to look at");
-            console.log(data.todo_bugs);
-            $("#remaining").empty();
-            $("#remaining").append(
-                document.createTextNode("Remaining bugs to examine: " + data.todo_bugs.length)
-            );
-            get_more_dependencies(d);
-        }
+            if (data.todo_bugs.length === 0) {
+                if (!data.outstanding_bugs) {
+                    console.log("Got all bugs");
+                    d.resolve(data.all_bugs);
+                }
+            }
+            else {
+                console.log("Still more bugs to look at");
+                console.log(data.todo_bugs);
+                get_more_dependencies(d);
+            }
+        });
     });
+
+    data.todo_bugs = [];
 }
 
 function get_all_dependencies(bug) {

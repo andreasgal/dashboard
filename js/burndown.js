@@ -9,6 +9,7 @@ var plot = null;
 function create_data() {
     return {
         // Retrieval state.
+        meta_bug : undefined,
         all_bugs : {},
         suppressed_bugs : [],
         todo_bugs : [],
@@ -107,16 +108,13 @@ function increment_ctr(a, d) {
 
 function compute_metrics() {
     data.today = date2day(new Date());
-    data.oldest_day = data.today;
+    data.oldest_day = date2day(new Date(data.all_bugs[data.meta_bug].creation_time));
 
     var day;
 
     $.map(data.all_bugs, function(b, index) {
         var d = date2day(new Date(b.creation_time));
-        
-        if (d < data.oldest_day)
-            data.oldest_day = d;
-        
+            
         b.burndown_creation_date = d;
         if (b.is_open) {
             b.burndown_resolution_date = data.today + 1;
@@ -145,16 +143,16 @@ function graph_metrics() {
         if (max_live < v)
             max_live = v;
 
-        series_live.push([k, v]);
+        series_live.push([k-data.oldest_day, v]);
     });
 
     $.map(data.added, function(v, k) {
-        series_added.push([k, v]);
+        series_added.push([k-data.oldest_day, v]);
         total_added += v;
     });
 
     $.map(data.fixed, function(v, k) {
-        series_fixed.push([k, v]);
+        series_fixed.push([k-data.oldest_day, v]);
         total_fixed += v;
     });
     
@@ -172,8 +170,8 @@ function graph_metrics() {
                              title : "Burndown",
                              axes : {
                                  xaxis : {
-                                     min : data.oldest_day - 1,
-                                     max : data.today
+                                     min : 0,
+                                     max : data.today - data.oldest_day
                                  },
                                  yaxis : {
                                      min : 0,
@@ -222,6 +220,7 @@ function update(meta_bug) {
         return;
     }
     data = create_data();
+    data.meta_bug = meta_bug;
 
     $("#stats").empty();
     $("#burndown").hide();

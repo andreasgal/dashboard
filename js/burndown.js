@@ -106,6 +106,16 @@ function increment_ctr(a, d) {
     a[d]++;
 }
 
+function is_completed(b) {
+    if (!b.is_open)
+        return true;
+
+    if (b.whiteboard.indexOf("landed") !== -1)
+        return true;
+
+    return false;
+}
+
 function compute_metrics() {
     data.today = date2day(new Date());
     data.oldest_day = date2day(new Date(data.all_bugs[data.meta_bug].creation_time));
@@ -116,7 +126,7 @@ function compute_metrics() {
         var d = date2day(new Date(b.creation_time));
             
         b.burndown_creation_date = d;
-        if (b.is_open) {
+        if (!is_completed(b)) {
             b.burndown_resolution_date = data.today + 1;
         } else {
             b.burndown_resolution_date = date2day(new Date(b.last_change_time));
@@ -206,6 +216,9 @@ function graph_metrics() {
                          }
                         );
 
+    $('burndown').bind('jqplotDataClick', function(ev, seriesIndex, pointIndex, data) {
+        console.log(ev, seriesIndex, pointIndex, data);
+    });
 
     $("#stats").append(document.createTextNode("Open bugs: " + data.live[data.today]));
     $("#stats").append(document.createElement("br"));
